@@ -2,14 +2,14 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import About from "./views/About.vue";
-import AddToCart from "./views/AddToCart.vue";
+import Store from "./views/Store.vue";
 import Contact from "./views/Contact.vue";
 import FAQ from "./views/FAQ.vue";
 import Error from "./views/Error.vue";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -30,11 +30,11 @@ export default new Router({
       }
     },
     {
-      path: "/cart",
-      name: "AddToCart",
-      component: AddToCart,
+      path: "/store",
+      name: "Store",
+      component: Store,
       meta: {
-        title: "Cart - Wread | A JA Company"
+        title: "Store - Wread | A JA Company"
       }
     },
     {
@@ -60,5 +60,17 @@ export default new Router({
         title: "Page Not Found"
       }
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
 });
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || "Wread | A JA Company";
+  next();
+});
+export default router;

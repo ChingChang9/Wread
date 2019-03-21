@@ -1,40 +1,55 @@
 <template>
   <div id="app">
-    <div class="pages">
-      <div class="left-page" @click="previousPage">
-        <router-view />
+    <!-- Add Header -->
+    <div id="book">
+      <div id="background" class="pages">
+        <div class="left-page">
+          <router-view />
+        </div>
+        <div class="right-page">
+          <router-view />
+        </div>
       </div>
-      <div class="right-page" @click="nextPage">
-        <router-view />
+      <div class="pages">
+        <div class="left-page" @click="previousPage">
+          <transition name="left-page" mode="out-in">
+            <router-view />
+          </transition>
+        </div>
+        <div class="right-page" @click="nextPage">
+          <transition name="right-page" mode="out-in">
+            <router-view />
+          </transition>
+        </div>
       </div>
     </div>
 
-    <div id="bookmark">
+    <div id="bookmarks">
       <router-link :to="{ name: 'Home' }">Home</router-link>
       <router-link :to="{ name: 'About' }">About Us</router-link>
-      <router-link :to="{ name: 'AddToCart' }">Add To Cart</router-link>
+      <router-link :to="{ name: 'Store' }">Store</router-link>
       <router-link :to="{ name: 'FAQ' }">FAQ</router-link>
       <router-link :to="{ name: 'Contact' }">Contact Us</router-link>
     </div>
+
     <img id="book-glider" src="@/assets/product.png" />
 
     <footer>
-      <div id="copyright" class="column">
-        <router-link :to="{ name: 'Home' }"><img src="@/assets/logo.svg" /></router-link>
-        <div>Wread &copy; 2019 Creative Commons - All Rights Reserved</div>
+      <div class="column">
+        <div class="title">Sponsors</div>
+        <a href="https://www.fountaintire.com/" target="_blank" class="text">Fountain Tire</a>
+        <a href="https://www.homedepot.ca/en/home.html" target="_blank" class="text">Home Depot</a>
+        <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank" class="text">Junior Achievement</a>
       </div>
       <div class="column">
         <div class="title">Social Links</div>
         <a href="mailto:wreadja@gmail.com" class="text">Email</a>
         <a href="https://www.facebook.com/wreadjacompany/?__tn__=%2Cd%2CP-R&eid=ARBPFmfiS-1T2RSFIYa8v0IRt6eObnBxy4UFHb_DtorebZyurXGpYQJ3r9FsH_r1Vpb1JlYhUBxXL1lG" target="_blank" class="text">Facebook</a>
         <a href="https://www.instagram.com/wread_ja/" target="_blank" class="text">Instagram</a>
-        <a href="#" target="_blank" class="text">Twitter</a>
       </div>
-      <div class="column">
-        <div class="title">Sponsors</div>
-        <a href="https://www.fountaintire.com/" target="_blank" class="text">Fountain Tire</a>
-        <a href="https://www.homedepot.ca/en/home.html" target="_blank" class="text">Home Depot</a>
-        <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank" class="text">Junior Achievement</a>
+      <div id="copyright" class="column">
+        <router-link :to="{ name: 'Home' }"><img src="@/assets/logo.svg" /></router-link>
+        <div>Wread &copy; 2019 Creative Commons - All Rights Reserved</div>
       </div>
     </footer>
   </div>
@@ -43,30 +58,76 @@
 <script>
 export default {
   name: "App",
-  data() {
-    return {
-      leftPageIndex: 1,
-      rightPageIndex: 1
-    };
+  watch: {
+    $route(to, from) {
+      if (to.name === "Home" ||
+      to.name === "About" && from.name !== "Home" ||
+      to.name === "Store" && from.name !== "Home" && from.name !== "About" ||
+      to.name === "FAQ" && from.name === "Contact") {
+        this.flipLeft();
+      } else {
+        this.flipRight();
+      }
+    }
   },
   methods: {
-    nextPage() {
-      document.querySelector(".right-page").classList.add("flipped");
+    flipRight() {
+      document.querySelectorAll(".right-page")[1].classList.add("flipped");
       document.querySelector("#book-glider").classList.add("flipping");
-      this.rightPageIndex += 1;
-      document.querySelector(".right-page").style.zIndex = this.rightPageIndex;
+      document.querySelectorAll(".right-page")[1].style.zIndex = 2;
+      document.querySelectorAll(".left-page")[1].style.zIndex = 1;
+      this.$nextTick(function() {
+        document.styleSheets[0].cssRules[3].style.transitionDelay = "950ms";
+        document.styleSheets[0].cssRules[4].style.transitionDelay = "770ms";
+      });
       setTimeout(function() {
+        document.querySelectorAll(".right-page")[1].querySelector(".right").style.display = "none";
+        document.querySelectorAll(".right-page")[1].querySelector(".left").style.display = "block";
+        document.querySelectorAll(".right-page")[1].querySelector(".left").style.transform = "rotateY(180deg)";
+      }, 810);
+      setTimeout(function() {
+        document.querySelectorAll(".right-page")[1].classList.remove("flipped");
+        document.querySelectorAll(".right-page")[1].querySelector(".left").style.display = "none";
+        document.querySelectorAll(".right-page")[1].querySelector(".right").style.display = "block";
         document.querySelector("#book-glider").classList.remove("flipping");
       }, 1000);
     },
-    previousPage() {
-      document.querySelector(".left-page").classList.add("flipped");
+    flipLeft() {
+      document.querySelectorAll(".left-page")[1].classList.add("flipped");
       document.querySelector("#book-glider").classList.add("flipping");
-      this.leftPageIndex += 1;
-      document.querySelector(".left-page").style.zIndex = this.leftPageIndex;
+      document.querySelectorAll(".left-page")[1].style.zIndex = 2;
+      document.querySelectorAll(".right-page")[1].style.zIndex = 1;
+      this.$nextTick(function() {
+        document.styleSheets[0].cssRules[3].style.transitionDelay = "770ms";
+        document.styleSheets[0].cssRules[4].style.transitionDelay = "950ms";
+      });
       setTimeout(function() {
+        document.querySelectorAll(".left-page")[1].querySelector(".left").style.display = "none";
+        document.querySelectorAll(".left-page")[1].querySelector(".right").style.display = "block";
+        document.querySelectorAll(".left-page")[1].querySelector(".right").style.transform = "rotateY(180deg)";
+      }, 820);
+      setTimeout(function() {
+        document.querySelectorAll(".left-page")[1].classList.remove("flipped");
+        document.querySelectorAll(".left-page")[1].querySelector(".right").style.display = "none";
+        document.querySelectorAll(".left-page")[1].querySelector(".left").style.display = "block";
         document.querySelector("#book-glider").classList.remove("flipping");
       }, 1000);
+    },
+    nextPage() {
+      switch (this.$route.name) {
+        case "Home": this.$router.push({ name: 'About' }); break;
+        case "About": this.$router.push({ name: 'Store' }); break;
+        case "Store": this.$router.push({ name: 'FAQ' }); break;
+        case "FAQ": this.$router.push({ name: 'Contact' }); break;
+      }
+    },
+    previousPage() {
+      switch (this.$route.name) {
+        case "Contact": this.$router.push({ name: 'FAQ' }); break;
+        case "FAQ": this.$router.push({ name: 'Store' }); break;
+        case "Store": this.$router.push({ name: 'About' }); break;
+        case "About": this.$router.push({ name: 'Home' }); break;
+      }
     }
   }
 }
@@ -75,64 +136,97 @@ export default {
 <style lang="scss">
 body {
   margin: 0px;
-  background-color: rgba(263, 196, 50, 0.6);
+  background-color: lighten($primary-colour, 20%);
   font-family: optima;
 }
 a {
   color: black;
   &:hover {
-    color: $secondary-colour;
+    color: darken($primary-colour, 20%);;
   }
 }
+.left-page-enter-active, .left-page-leave-active {
+  transition-delay: 950ms;
+}
+.right-page-enter-active, .right-page-leave-active {
+  transition-delay: 770ms;
+}
 
-.pages {
-  display: flex;
-  margin-top: 15px;
-  margin-left: calc(15vw - 70px);
-  font-size: calc(18px + 1vw);
-  &#home {
-    position: relative;
-  }
-  .left-page, .right-page {
-    width: calc(35vw - 4px);
-    height: 70vh;
-    padding: 45px 35px;
-    border: 2px solid black;
-    background-color: #ffffdd;
-    transition-duration: 1s;
-    transition-timing-function: cubic-bezier(0.5, 0, 1, 0.7);
-    z-index: 1;
-    cursor: pointer;
-  }
-  .left-page {
-    transform-origin: right;
-    border-radius: 20px 0px 0px 20px;
-    box-shadow: -10px 20px 50px black;
-    transform: skewY(4deg) rotateX(30deg);
-    &.flipped {
-      transform: skewY(-4deg) rotateX(30deg) rotateY(180deg);
+#book {
+  height: calc(70vh + 105px);
+  .pages {
+    position: absolute;
+    display: flex;
+    margin-top: 15px;
+    margin-left: calc(15vw - 70px);
+    font-size: 20px;
+    &#background {
+      .left-page, .right-page {
+        box-shadow: 0px 20px 50px black;
+      }
+      .left-page {
+        .left {
+          display: block !important;
+        }
+        .right {
+          display: none !important;
+        }
+      }
+      .right-page {
+        .right {
+          display: block !important;
+        }
+        .left {
+          display: none !important;
+        }
+      }
     }
-    .right {
-      display: none;
+    .left-page, .right-page {
+      width: calc(35vw - 4px);
+      height: 70vh;
+      padding: 45px 35px;
+      border: 2px solid black;
+      background-color: lighten($primary-colour, 35%);
+      transition-timing-function: cubic-bezier(0.5, 0, 1, 0.7);
+      z-index: 1;
+      cursor: pointer;
+      .break {
+        height: 1px;
+        background-color: black;
+        border-radius: 1px;
+        margin: 0.5em 0em;
+      }
     }
-  }
-  .right-page {
-    transform-origin: left;
-    border-radius: 0px 20px 20px 0px;
-    box-shadow: 10px 20px 50px black;
-    transform: skewY(-4deg) rotateX(30deg);
-    &.flipped {
-      transform: skewY(4deg) rotateX(30deg) rotateY(180deg);
+    .left-page {
+      transform-origin: right;
+      border-radius: 20px 0px 0px 20px;
+      transform: skewY(4deg) rotateX(30deg);
+      &.flipped {
+        transform: skewY(-4deg) rotateX(30deg) rotateY(180deg);
+        transition-duration: 1s;
+      }
+      .right {
+        display: none;
+      }
     }
-    .left {
-      display: none;
+    .right-page {
+      transform-origin: left;
+      border-radius: 0px 20px 20px 0px;
+      transform: skewY(-4deg) rotateX(30deg);
+      &.flipped {
+        transform: skewY(4deg) rotateX(30deg) rotateY(180deg);
+        transition-duration: 1s;
+      }
+      .left {
+        display: none;
+      }
     }
   }
 }
 #book-glider {
-  width: 420px;
+  width: 28vw;
   position: absolute;
-  left: calc(50vw - 210px);
+  left: calc(36vw + 2px);
   top: calc(60vh + 15px);
   transform: scale(1) rotateZ(180deg) rotateX(-60deg) translateY(0px);
   z-index: 9999;
@@ -142,7 +236,7 @@ a {
     transform: scale(1.4) rotateZ(180deg) rotateX(30deg) translateY(-60px);
   }
 }
-#bookmark {
+#bookmarks {
   position: absolute;
   top: 60px;
   left: 87%;
@@ -153,17 +247,15 @@ a {
     display: block;
     color: black;
     text-decoration: none;
-    background-color: $tertiary-colour;
+    background-color: darken($secondary-colour, 10%);
     padding: 10px 5px 10px 60px;
     border-radius: 5px;
     margin-bottom: 25px;
     font-weight: 600;
     cursor: pointer;
-    opacity: 0.5;
     transform: scale(1);
     transition-duration: 0.3s;
-    &:hover {
-      opacity: 1;
+    &:hover, &.router-link-exact-active {
       transform: scale(1.3);
     }
   }
@@ -172,7 +264,7 @@ a {
 footer {
   display: flex;
   padding: 20px 60px;
-  background-color: #ffebf7;
+  background-color: lighten($secondary-colour, 20%);
   #copyright {
     text-align: center;
     width: calc(3.5vw + 100px);
@@ -194,15 +286,13 @@ footer {
     margin: 0px 5vw;
     width: calc(40px + 10vw);
     .title {
-      color: transparent;
-      background-color: black;
-      background-clip: text;
-      text-shadow: -1px -1px 1px $primary-colour;
+      color: black;
       text-align: center;
       cursor: default;
       font-size: calc(18px + 1vw);
       font-weight: 700;
       margin-bottom: 13px;
+      letter-spacing: 5px;
     }
     .text {
       text-align: center;

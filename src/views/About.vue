@@ -1,9 +1,12 @@
 <template>
   <div>
     <div class="left">
-      <div>Mission Statement</div>
-      <div class="break"></div>
-      <div>To care for our world together by creating a path for new opportunities, new smiles, and new pages.</div>
+      <div>
+        Wread, A JA Company creates the book glider through the hard work of many hands, so that you
+        can read with one! Our product is made of locally sourced recycled wood, durable, with a
+        professional polish finishing. With our product we strive to promote literacy for all ages,
+        and support the message of spreading knowledge, communication, and creativity to our world.
+      </div>
     </div>
     <div class="right">
     </div>
@@ -17,10 +20,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.break {
-  height: 1px;
-  background-color: black;
-  border-radius: 1px;
-  margin: 0.5em 0em;
-}
 </style>
