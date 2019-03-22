@@ -1,38 +1,47 @@
 <template>
   <div id="app">
-    <!-- Add Header -->
-    <div id="book">
-      <div id="background" class="pages">
-        <div class="left-page">
-          <router-view />
-        </div>
-        <div class="right-page">
-          <router-view />
-        </div>
-      </div>
-      <div class="pages">
-        <div class="left-page" @click="previousPage">
-          <transition name="left-page" mode="out-in">
-            <router-view />
-          </transition>
-        </div>
-        <div class="right-page" @click="nextPage">
-          <transition name="right-page" mode="out-in">
-            <router-view />
-          </transition>
-        </div>
-      </div>
+    <div id="nav">
+      <router-link :to="{ name: 'Home' }" :class="{ active: !goalPage }">Home</router-link>
+      <router-link :to="{ name: 'Goal' }" :class="{ active: goalPage }">Goal</router-link>
     </div>
 
-    <div id="bookmarks">
-      <router-link :to="{ name: 'Home' }">Home</router-link>
-      <router-link :to="{ name: 'About' }">About Us</router-link>
-      <router-link :to="{ name: 'Store' }">Store</router-link>
-      <router-link :to="{ name: 'FAQ' }">FAQ</router-link>
-      <router-link :to="{ name: 'Contact' }">Contact Us</router-link>
-    </div>
+    <div v-if="this.$route.name !== 'Goal'">
+      <div id="book">
+        <div id="background" class="pages">
+          <div class="left-page">
+            <router-view />
+          </div>
+          <div class="right-page">
+            <router-view />
+          </div>
+        </div>
+        <div class="pages">
+          <div class="left-page" @click="previousPage">
+            <transition name="left-page" mode="out-in">
+              <router-view />
+            </transition>
+          </div>
+          <div class="right-page" @click="nextPage">
+            <transition name="right-page" mode="out-in">
+              <router-view />
+            </transition>
+          </div>
+        </div>
+      </div>
 
-    <img id="book-glider" src="@/assets/product.png" />
+      <div id="bookmarks">
+        <router-link :to="{ name: 'Home' }">Home</router-link>
+        <router-link :to="{ name: 'About' }">About Us</router-link>
+        <router-link :to="{ name: 'Store' }">Store</router-link>
+        <router-link :to="{ name: 'FAQ' }">FAQ</router-link>
+        <router-link :to="{ name: 'Contact' }">Contact Us</router-link>
+      </div>
+
+      <img id="book-glider" src="@/assets/product.png" />
+    </div>
+    <div v-else>
+      <router-view />
+    </div>
 
     <footer>
       <div class="column">
@@ -58,28 +67,31 @@
 <script>
 export default {
   name: "App",
+  computed: {
+    goalPage() {
+      return this.$route.name === "Goal";
+    }
+  },
   watch: {
     $route(to, from) {
-      if (to.name === "Home" ||
+      if (to.name === "Home" && from.name !== "Goal" ||
       to.name === "About" && from.name !== "Home" ||
       to.name === "Store" && from.name !== "Home" && from.name !== "About" ||
       to.name === "FAQ" && from.name === "Contact") {
         this.flipLeft();
-      } else {
+      } else if (to.name !== "Goal" && from.name !== "Goal") {
         this.flipRight();
       }
     }
   },
   methods: {
     flipRight() {
+      document.styleSheets[0].cssRules[3].style.transitionDelay = "950ms";
+      document.styleSheets[0].cssRules[4].style.transitionDelay = "770ms";
       document.querySelectorAll(".right-page")[1].classList.add("flipped");
       document.querySelector("#book-glider").classList.add("flipping");
       document.querySelectorAll(".right-page")[1].style.zIndex = 2;
       document.querySelectorAll(".left-page")[1].style.zIndex = 1;
-      this.$nextTick(function() {
-        document.styleSheets[0].cssRules[3].style.transitionDelay = "950ms";
-        document.styleSheets[0].cssRules[4].style.transitionDelay = "770ms";
-      });
       setTimeout(function() {
         document.querySelectorAll(".right-page")[1].querySelector(".right").style.display = "none";
         document.querySelectorAll(".right-page")[1].querySelector(".left").style.display = "block";
@@ -93,14 +105,12 @@ export default {
       }, 1000);
     },
     flipLeft() {
+      document.styleSheets[0].cssRules[3].style.transitionDelay = "770ms";
+      document.styleSheets[0].cssRules[4].style.transitionDelay = "950ms";
       document.querySelectorAll(".left-page")[1].classList.add("flipped");
       document.querySelector("#book-glider").classList.add("flipping");
       document.querySelectorAll(".left-page")[1].style.zIndex = 2;
       document.querySelectorAll(".right-page")[1].style.zIndex = 1;
-      this.$nextTick(function() {
-        document.styleSheets[0].cssRules[3].style.transitionDelay = "770ms";
-        document.styleSheets[0].cssRules[4].style.transitionDelay = "950ms";
-      });
       setTimeout(function() {
         document.querySelectorAll(".left-page")[1].querySelector(".left").style.display = "none";
         document.querySelectorAll(".left-page")[1].querySelector(".right").style.display = "block";
@@ -142,7 +152,7 @@ body {
 a {
   color: black;
   &:hover {
-    color: darken($primary-colour, 20%);;
+    color: darken($primary-colour, 20%);
   }
 }
 .left-page-enter-active, .left-page-leave-active {
@@ -152,12 +162,35 @@ a {
   transition-delay: 770ms;
 }
 
+#nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  background-color: white;
+  height: 75px;
+  z-index: 9999;
+  a {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    box-shadow: 0px 1px 2px black;
+    &:hover, &.active {
+      background-color: black;
+      color: white;
+    }
+  }
+}
+
 #book {
   height: calc(70vh + 105px);
   .pages {
     position: absolute;
     display: flex;
-    margin-top: 15px;
+    margin-top: 25px;
     margin-left: calc(15vw - 70px);
     font-size: 20px;
     &#background {
@@ -227,7 +260,7 @@ a {
   width: 28vw;
   position: absolute;
   left: calc(36vw + 2px);
-  top: calc(60vh + 15px);
+  top: calc(60vh + 100px);
   transform: scale(1) rotateZ(180deg) rotateX(-60deg) translateY(0px);
   z-index: 9999;
   filter: drop-shadow(0px 10px 20px black);
@@ -238,7 +271,7 @@ a {
 }
 #bookmarks {
   position: absolute;
-  top: 60px;
+  top: 135px;
   left: 87%;
   text-align: right;
   z-index: 0;
@@ -267,14 +300,13 @@ footer {
   background-color: lighten($secondary-colour, 20%);
   #copyright {
     text-align: center;
-    width: calc(3.5vw + 100px);
     cursor: default;
     font-size: 13px;
     div {
-      width: 65%;
+      width: 70%;
     }
     img {
-      width: 55%;
+      width: calc(40% + 30px);
       padding-bottom: 10px;
     }
   }
@@ -287,7 +319,6 @@ footer {
     width: calc(40px + 10vw);
     .title {
       color: black;
-      text-align: center;
       cursor: default;
       font-size: calc(18px + 1vw);
       font-weight: 700;
@@ -295,11 +326,26 @@ footer {
       letter-spacing: 5px;
     }
     .text {
-      text-align: center;
-      text-decoration: none;
       font-size: calc(16px + 0.2vw);
       padding-bottom: 4px;
       text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 815px) {
+  footer {
+    align-items: center;
+    flex-direction: column;
+    #copyright {
+      width: 50vw;
+    }
+    .column {
+      margin-bottom: 20px;
+      width: 50vw;
+      .title {
+        margin-bottom: 0px;
+      }
     }
   }
 }

@@ -5,6 +5,7 @@ import About from "./views/About.vue";
 import Store from "./views/Store.vue";
 import Contact from "./views/Contact.vue";
 import FAQ from "./views/FAQ.vue";
+import Goal from "./views/Goal.vue";
 import Error from "./views/Error.vue";
 
 Vue.use(Router);
@@ -51,6 +52,14 @@ const router = new Router({
       component: FAQ,
       meta: {
         title: "FAQ - Wread | A JA Company"
+      }
+    },
+    {
+      path: "/goal",
+      name: "Goal",
+      component: Goal,
+      meta: {
+        title: "Goal - Wread | A JA Company"
       }
     },
     {

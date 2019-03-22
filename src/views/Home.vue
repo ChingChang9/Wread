@@ -2,7 +2,7 @@
   <div>
     <div class="left">
       <img id="logo" src="@/assets/logo.svg" />
-      <img id="name" src="@/assets/companyName.jpg" />
+      <img id="name" src="@/assets/companyName.png" />
     </div>
     <div class="right">
       <div>Mission Statement</div>
