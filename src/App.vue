@@ -1,46 +1,39 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link :to="{ name: 'Home' }" :class="{ active: !goalPage }">Home</router-link>
-      <router-link :to="{ name: 'Goal' }" :class="{ active: goalPage }">Goal</router-link>
-    </div>
 
-    <div v-if="this.$route.name !== 'Goal'">
-      <div id="book">
-        <div id="background" class="pages">
-          <div class="left-page">
-            <router-view />
-          </div>
-          <div class="right-page">
-            <router-view />
-          </div>
+    <div id="book">
+      <div id="background" class="pages">
+        <div class="left-page">
+          <router-view />
         </div>
-        <div class="pages">
-          <div class="left-page" @click="previousPage">
-            <transition name="left-page" mode="out-in">
-              <router-view />
-            </transition>
-          </div>
-          <div class="right-page" @click="nextPage">
-            <transition name="right-page" mode="out-in">
-              <router-view />
-            </transition>
-          </div>
+        <div class="right-page">
+          <router-view />
         </div>
       </div>
-
-      <div id="bookmarks">
-        <router-link :to="{ name: 'Home' }">Home</router-link>
-        <router-link :to="{ name: 'About' }">About Us</router-link>
-        <router-link :to="{ name: 'Store' }">Store</router-link>
-        <router-link :to="{ name: 'FAQ' }">FAQ</router-link>
-        <router-link :to="{ name: 'Contact' }">Contact Us</router-link>
+      <div class="pages">
+        <div class="left-page" @click.self="previousPage">
+          <transition name="left-page" mode="out-in">
+            <router-view />
+          </transition>
+        </div>
+        <div class="right-page" @click.self="nextPage">
+          <transition name="right-page" mode="out-in">
+            <router-view />
+          </transition>
+        </div>
       </div>
-
-      <img id="book-glider" src="@/assets/product.png" />
     </div>
-    <div v-else>
-      <router-view />
+
+    <div id="bookmarks">
+      <router-link :to="{ name: 'Home' }">Home</router-link>
+      <router-link id="store" :to="{ name: 'Store' }">Store</router-link>
+      <router-link :to="{ name: 'Product' }">Product</router-link>
+      <router-link :to="{ name: 'About' }">About Us</router-link>
+      <router-link :to="{ name: 'Contact' }">Contact Us</router-link>
+    </div>
+
+    <div id="book-glider-wrap">
+      <img id="book-glider" class="before-mount" src="@/assets/product1.png" />
     </div>
 
     <footer>
@@ -57,7 +50,9 @@
         <a href="https://www.instagram.com/wread_ja/" target="_blank" class="text">Instagram</a>
       </div>
       <div id="copyright" class="column">
-        <router-link :to="{ name: 'Home' }"><img src="@/assets/logo.svg" /></router-link>
+        <div>
+          <router-link :to="{ name: 'Home' }"><img src="@/assets/icons/logo.svg" /></router-link>
+        </div>
         <div>Wread &copy; 2019 Creative Commons - All Rights Reserved</div>
       </div>
     </footer>
@@ -67,27 +62,32 @@
 <script>
 export default {
   name: "App",
-  computed: {
-    goalPage() {
-      return this.$route.name === "Goal";
-    }
-  },
   watch: {
     $route(to, from) {
-      if (to.name === "Home" && from.name !== "Goal" ||
-      to.name === "About" && from.name !== "Home" ||
-      to.name === "Store" && from.name !== "Home" && from.name !== "About" ||
-      to.name === "FAQ" && from.name === "Contact") {
+      if (to.name === "Home" ||
+      to.name === "Store" && from.name !== "Home" ||
+      to.name === "Product" && from.name !== "Home" && from.name !== "Store" ||
+      to.name === "About" && from.name === "Contact") {
         this.flipLeft();
-      } else if (to.name !== "Goal" && from.name !== "Goal") {
+      } else {
         this.flipRight();
       }
     }
   },
+  mounted() {
+    setTimeout(function() {
+      document.querySelector("#book-glider").classList.remove("before-mount");
+    }, 100);
+  },
   methods: {
     flipRight() {
-      document.styleSheets[0].cssRules[3].style.transitionDelay = "950ms";
-      document.styleSheets[0].cssRules[4].style.transitionDelay = "770ms";
+      if (document.styleSheets[0].cssRules[0].style[0] === "font-family") {
+        document.styleSheets[0].cssRules[4].style.transitionDelay = "950ms";
+        document.styleSheets[0].cssRules[5].style.transitionDelay = "770ms";
+      } else {
+        document.styleSheets[1].cssRules[4].style.transitionDelay = "950ms";
+        document.styleSheets[1].cssRules[5].style.transitionDelay = "770ms";
+      }
       document.querySelectorAll(".right-page")[1].classList.add("flipped");
       document.querySelector("#book-glider").classList.add("flipping");
       document.querySelectorAll(".right-page")[1].style.zIndex = 2;
@@ -105,8 +105,13 @@ export default {
       }, 1000);
     },
     flipLeft() {
-      document.styleSheets[0].cssRules[3].style.transitionDelay = "770ms";
-      document.styleSheets[0].cssRules[4].style.transitionDelay = "950ms";
+      if (document.styleSheets[0].cssRules[0].style[0] === "font-family") {
+        document.styleSheets[0].cssRules[4].style.transitionDelay = "770ms";
+        document.styleSheets[0].cssRules[5].style.transitionDelay = "950ms";
+      } else {
+        document.styleSheets[1].cssRules[4].style.transitionDelay = "770ms";
+        document.styleSheets[1].cssRules[5].style.transitionDelay = "950ms";
+      }
       document.querySelectorAll(".left-page")[1].classList.add("flipped");
       document.querySelector("#book-glider").classList.add("flipping");
       document.querySelectorAll(".left-page")[1].style.zIndex = 2;
@@ -125,18 +130,18 @@ export default {
     },
     nextPage() {
       switch (this.$route.name) {
-        case "Home": this.$router.push({ name: 'About' }); break;
-        case "About": this.$router.push({ name: 'Store' }); break;
-        case "Store": this.$router.push({ name: 'FAQ' }); break;
-        case "FAQ": this.$router.push({ name: 'Contact' }); break;
+        case "Home": this.$router.push({ name: 'Store' }); break;
+        case "Store": this.$router.push({ name: 'Product' }); break;
+        case "Product": this.$router.push({ name: 'About' }); break;
+        case "About": this.$router.push({ name: 'Contact' }); break;
       }
     },
     previousPage() {
       switch (this.$route.name) {
-        case "Contact": this.$router.push({ name: 'FAQ' }); break;
-        case "FAQ": this.$router.push({ name: 'Store' }); break;
-        case "Store": this.$router.push({ name: 'About' }); break;
-        case "About": this.$router.push({ name: 'Home' }); break;
+        case "Contact": this.$router.push({ name: 'About' }); break;
+        case "About": this.$router.push({ name: 'Product' }); break;
+        case "Product": this.$router.push({ name: 'Store' }); break;
+        case "Store": this.$router.push({ name: 'Home' }); break;
       }
     }
   }
@@ -144,10 +149,36 @@ export default {
 </script>
 
 <style lang="scss">
+@font-face {
+  font-family: Varela Round;
+  src: url('assets/fonts/VarelaRound.ttf');
+}
+@font-face {
+  font-family: Montserrat;
+  src: url('assets/fonts/Montserrat-Medium.ttf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url('assets/fonts/Montserrat-Bold.ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url('assets/fonts/Montserrat-ExtraBold.ttf');
+  font-weight: 800;
+}
+
+.left-page-enter-active, .left-page-leave-active {
+  transition-delay: 950ms;
+}
+.right-page-enter-active, .right-page-leave-active {
+  transition-delay: 770ms;
+}
 body {
   margin: 0px;
   background-color: lighten($primary-colour, 20%);
-  font-family: optima;
+  font-family: Varela Round;
 }
 a {
   color: black;
@@ -155,34 +186,8 @@ a {
     color: darken($primary-colour, 20%);
   }
 }
-.left-page-enter-active, .left-page-leave-active {
-  transition-delay: 950ms;
-}
-.right-page-enter-active, .right-page-leave-active {
-  transition-delay: 770ms;
-}
-
-#nav {
-  position: sticky;
-  top: 0;
-  display: flex;
-  background-color: white;
-  height: 75px;
-  z-index: 9999;
-  a {
-    display: flex;
-    align-items: center;
-    font-size: 30px;
-    text-decoration: none;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    box-shadow: 0px 1px 2px black;
-    &:hover, &.active {
-      background-color: black;
-      color: white;
-    }
-  }
+.title {
+  font-size: calc(22px + 2vw);
 }
 
 #book {
@@ -222,7 +227,6 @@ a {
       background-color: lighten($primary-colour, 35%);
       transition-timing-function: cubic-bezier(0.5, 0, 1, 0.7);
       z-index: 1;
-      cursor: pointer;
       .break {
         height: 1px;
         background-color: black;
@@ -231,6 +235,7 @@ a {
       }
     }
     .left-page {
+      cursor: url('assets/alias-left.png'), auto;
       transform-origin: right;
       border-radius: 20px 0px 0px 20px;
       transform: skewY(4deg) rotateX(30deg);
@@ -238,11 +243,15 @@ a {
         transform: skewY(-4deg) rotateX(30deg) rotateY(180deg);
         transition-duration: 1s;
       }
+      .left {
+        cursor: auto;
+      }
       .right {
         display: none;
       }
     }
     .right-page {
+      cursor: url('assets/alias-right.png'), auto;
       transform-origin: left;
       border-radius: 0px 20px 20px 0px;
       transform: skewY(-4deg) rotateX(30deg);
@@ -253,26 +262,41 @@ a {
       .left {
         display: none;
       }
+      .right {
+        cursor: auto;
+      }
     }
   }
 }
-#book-glider {
-  width: 28vw;
+#book-glider-wrap {
   position: absolute;
+  filter:
+  drop-shadow(0px 1px 0px #bdaa84)
+  drop-shadow(0px 2px 0px #bdaa84)
+  drop-shadow(0px 3px 0px #bdaa84)
+  drop-shadow(0px 4px 0px #bdaa84)
+  drop-shadow(0px 5px 0px #bdaa84)
+  drop-shadow(0px 6px 0px #bdaa84)
+  drop-shadow(0px 7px 0px #bdaa84)
+  drop-shadow(0px 8px 0px #bdaa84)
+  drop-shadow(0px -5px 10px black);
+  top: calc(52.5vh + 25px);
   left: calc(36vw + 2px);
-  top: calc(60vh + 100px);
-  transform: scale(1) rotateZ(180deg) rotateX(-60deg) translateY(0px);
   z-index: 9999;
-  filter: drop-shadow(0px 10px 20px black);
-  transition-duration: 1s;
-  &.flipping {
-    transform: scale(1.4) rotateZ(180deg) rotateX(30deg) translateY(-60px);
+  #book-glider {
+    width: 28vw;
+    transform: scale(1) rotateZ(180deg) rotateX(-80deg) translateY(0px);
+    transition-duration: 1s;
+    &.flipping, &.before-mount {
+      transform: scale(1.4) rotateZ(180deg) rotateX(30deg) translateY(-60px);
+    }
   }
 }
 #bookmarks {
   position: absolute;
-  top: 135px;
+  top: 60px;
   left: 87%;
+  font-family: Montserrat;
   text-align: right;
   z-index: 0;
   transform: skewY(-6deg) rotateX(30deg);
@@ -284,10 +308,14 @@ a {
     padding: 10px 5px 10px 60px;
     border-radius: 5px;
     margin-bottom: 25px;
-    font-weight: 600;
-    cursor: pointer;
+    font-weight: 700;
     transform: scale(1);
     transition-duration: 0.3s;
+    &#store {
+      background-color: $orange;
+      clip-path: polygon(0% 0%, 100% 0%, 92.5% 50%, 100% 100%, 0% 100%);
+      padding-right: calc(7.5% + 5px);
+    }
     &:hover, &.router-link-exact-active {
       transform: scale(1.3);
     }
@@ -318,10 +346,11 @@ footer {
     margin: 0px 5vw;
     width: calc(40px + 10vw);
     .title {
+      font-family: Montserrat;
+      font-weight: 700;
       color: black;
       cursor: default;
       font-size: calc(18px + 1vw);
-      font-weight: 700;
       margin-bottom: 13px;
       letter-spacing: 5px;
     }
@@ -330,6 +359,9 @@ footer {
       padding-bottom: 4px;
       text-decoration: underline;
     }
+  }
+  img {
+    width: 30px;
   }
 }
 

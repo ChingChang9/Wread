@@ -4,7 +4,7 @@ import Home from "./views/Home.vue";
 import About from "./views/About.vue";
 import Store from "./views/Store.vue";
 import Contact from "./views/Contact.vue";
-import FAQ from "./views/FAQ.vue";
+import Product from "./views/Product.vue";
 import Goal from "./views/Goal.vue";
 import Error from "./views/Error.vue";
 
@@ -23,14 +23,6 @@ const router = new Router({
       }
     },
     {
-      path: "/about",
-      name: "About",
-      component: About,
-      meta: {
-        title: "About Us - Wread | A JA Company"
-      }
-    },
-    {
       path: "/store",
       name: "Store",
       component: Store,
@@ -39,19 +31,27 @@ const router = new Router({
       }
     },
     {
+      path: "/product",
+      name: "Product",
+      component: Product,
+      meta: {
+        title: "Product - Wread | A JA Company"
+      }
+    },
+    {
+      path: "/about",
+      name: "About",
+      component: About,
+      meta: {
+        title: "About Us - Wread | A JA Company"
+      }
+    },
+    {
       path: "/contact",
       name: "Contact",
       component: Contact,
       meta: {
         title: "Contact Us - Wread | A JA Company"
-      }
-    },
-    {
-      path: "/faq",
-      name: "FAQ",
-      component: FAQ,
-      meta: {
-        title: "FAQ - Wread | A JA Company"
       }
     },
     {

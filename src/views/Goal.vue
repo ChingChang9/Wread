@@ -1,5 +1,5 @@
 <template>
-  <div id="main-div">
+  <div class="main-div">
     <img id="book-glider" src="@/assets/product.png" />
     <div id="radial-progress">
       <div id="circle" @click="fill">
@@ -26,7 +26,7 @@ export default {
   name: "Goal",
   data() {
     return {
-      sold: 107,
+      sold: 114,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
@@ -38,7 +38,7 @@ export default {
       this.intervalID = setInterval(function() {
         if (this.percentage < this.sold / 800 * 100) {
           this.percentage += this.acceleration;
-          this.acceleration *= 1.015;
+          this.acceleration *= 1.02;
         } else {
           this.percentage = this.sold / 800 * 100;
           clearInterval(this.intervalID);
@@ -65,7 +65,7 @@ export default {
 <style lang="scss" scoped>
 $circle-size: 22.5vw;
 
-#main-div {
+.main-div {
   display: flex;
   align-items: center;
   text-align: center;
@@ -76,7 +76,7 @@ $circle-size: 22.5vw;
     height: 40vw;
     position: absolute;
     left: 5vw;
-    top: 100px;
+    top: 25px;
     z-index: -1;
     filter: drop-shadow(0px 5px 10px black);
     transform: rotateZ(0deg) rotateX(0deg);

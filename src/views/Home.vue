@@ -1,17 +1,10 @@
 <template>
   <div>
     <div class="left">
-      <img id="logo" src="@/assets/logo.svg" />
+      <img id="logo" src="@/assets/icons/logo.svg" />
       <img id="name" src="@/assets/companyName.png" />
     </div>
     <div class="right">
-      <div>Mission Statement</div>
-      <div class="break"></div>
-      <div>
-        To care for our world together by creating a path for new opportunities, new smiles, and new
-        pages
-      </div>
-      <img src="@/assets/groupPhoto.jpg" />
     </div>
   </div>
 </template>
@@ -34,11 +27,8 @@ export default {
   }
 }
 .right {
-  font-size: 30px;
-  img {
-    margin-top: 30px;
+  video {
     width: 100%;
-    border: 2px solid black;
   }
 }
 </style>
