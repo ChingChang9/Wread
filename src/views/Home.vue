@@ -2,9 +2,19 @@
   <div>
     <div class="left">
       <img id="logo" src="@/assets/icons/logo.svg" />
-      <img id="name" src="@/assets/companyName.png" />
+      <img id="name" src="@/assets/company-name.png" />
     </div>
     <div class="right">
+      <div>
+        Through the hard work of many hands, we give you the joy to read with just one
+      </div>
+      <div class="break"></div>
+      <video src="@/assets/videos/clip1.mp4" autoplay muted loop></video>
+      <div class="break"></div>
+      <div>
+        We strive to promote literacy for all ages, and support the message of spreading knowledge,
+        communication, and creativity to our world
+      </div>
     </div>
   </div>
 </template>

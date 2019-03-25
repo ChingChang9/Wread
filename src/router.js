@@ -4,7 +4,7 @@ import Home from "./views/Home.vue";
 import About from "./views/About.vue";
 import Store from "./views/Store.vue";
 import Contact from "./views/Contact.vue";
-import Product from "./views/Product.vue";
+import Info from "./views/Info.vue";
 import Goal from "./views/Goal.vue";
 import Error from "./views/Error.vue";
 
@@ -31,11 +31,11 @@ const router = new Router({
       }
     },
     {
-      path: "/product",
-      name: "Product",
-      component: Product,
+      path: "/info",
+      name: "Info",
+      component: Info,
       meta: {
-        title: "Product - Wread | A JA Company"
+        title: "Info - Wread | A JA Company"
       }
     },
     {

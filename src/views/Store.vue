@@ -11,17 +11,21 @@
     <div class="right">
       <div class="title">Book Glider</div>
       <ul>
-        <li>Hand sanded poplar wood, carefully inspected smooth surface</li>
         <li>Light, small, easy to carry</li>
+        <li>Hand sanded poplar wood, carefully inspected smooth surface</li>
         <li>Aesthetic design, protects the spine of the book</li>
         <li>Sustainable materials, 100% recycled materials for packaging</li>
         <li>Low VOC polish</li>
       </ul>
       <div id="price">
-        <span style="float: left;"><span style="font-family: Montserrat; font-weight: 800; text-decoration: underline;">$5.00</span> per glider</span>-or-<span style="float: right;">Buy 4 get 1 free</span>
+        <span><span style="font-family: Montserrat; font-weight: 800; text-decoration: underline;">$5.00</span> per glider</span>
+        <span>-or-</span>
+        <span>5 for <span style="font-family: Montserrat; font-weight: 800; text-decoration: underline;">$20.00</span></span>
       </div>
-      <div class="button">
-        <a href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">Buy Now</a>
+      <div class="button-wrap">
+        <div class="button">
+          <a href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">Buy Now</a>
+        </div>
       </div>
       <div class="description">
         All of our materials are locally sourced in an environmentally responsible manner
@@ -49,6 +53,7 @@ export default {
     display: flex;
     height: 100px;
     img {
+      cursor: pointer;
       flex-grow: 1;
       width: 0px;
       margin-bottom: 15px;
@@ -67,32 +72,41 @@ export default {
   }
 }
 .right {
-  .button {
-    text-align: center;
-    margin-top: 45px;
-    margin-bottom: 45px;
-    display: inline-block;
-    &:hover {
-      transform: scale(1.05);
-    }
-    a {
-      background-color: $orange;
-      padding: 10px;
-      border-radius: 10px;
-      font-family: Montserrat;
-      font-weight: 500;
-      font-size: calc(18px + 1vw);
-      text-decoration: none;
-      color: black;
-      box-shadow: 1px 2px 5px black;
-      text-shadow: 1px 1px 2px black;
-      &:hover {
-        background-color: darken($orange, 5%);
-      }
-    }
-  }
   #price {
     text-align: center;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    span {
+      width: 200px;
+    }
+  }
+  .button-wrap {
+    text-align: center;
+    .button {
+      margin-top: 45px;
+      margin-bottom: 45px;
+      display: inline-block;
+      text-align: center;
+      &:hover {
+        transform: scale(1.05);
+      }
+      a {
+        background-color: $orange;
+        padding: 10px;
+        border-radius: 10px;
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: calc(18px + 1vw);
+        text-decoration: none;
+        color: black;
+        box-shadow: 1px 2px 5px black;
+        text-shadow: 1px 1px 2px black;
+        &:hover {
+          background-color: darken($orange, 5%);
+        }
+      }
+    }
   }
   .description {
     font-size: 16px;

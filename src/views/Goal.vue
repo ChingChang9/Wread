@@ -1,6 +1,6 @@
 <template>
   <div class="main-div">
-    <img id="book-glider" src="@/assets/product.png" />
+    <img id="book-glider" src="@/assets/2d-product.png" />
     <div id="radial-progress">
       <div id="circle" @click="fill">
         <div class="mask">

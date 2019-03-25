@@ -1,39 +1,45 @@
 <template>
   <div id="app">
 
-    <div id="book">
-      <div id="background" class="pages">
-        <div class="left-page">
-          <router-view />
+    <div v-if="this.$route.name !== 'Goal'">
+      <div id="book">
+        <div id="background" class="pages">
+          <div class="left-page">
+            <router-view />
+          </div>
+          <div class="right-page">
+            <router-view />
+          </div>
         </div>
-        <div class="right-page">
-          <router-view />
+        <div class="pages">
+          <div class="left-page" @click.self="previousPage">
+            <transition name="left-page" mode="out-in">
+              <router-view />
+            </transition>
+          </div>
+          <div class="right-page" @click.self="nextPage">
+            <transition name="right-page" mode="out-in">
+              <router-view />
+            </transition>
+          </div>
         </div>
       </div>
-      <div class="pages">
-        <div class="left-page" @click.self="previousPage">
-          <transition name="left-page" mode="out-in">
-            <router-view />
-          </transition>
-        </div>
-        <div class="right-page" @click.self="nextPage">
-          <transition name="right-page" mode="out-in">
-            <router-view />
-          </transition>
-        </div>
+
+      <div id="bookmarks">
+        <router-link :to="{ name: 'Home' }">Home</router-link>
+        <router-link id="store" :to="{ name: 'Store' }">Store</router-link>
+        <router-link :to="{ name: 'Info' }">Info</router-link>
+        <router-link :to="{ name: 'About' }">About Us</router-link>
+        <router-link :to="{ name: 'Contact' }">Contact Us</router-link>
+      </div>
+
+      <div id="book-glider-wrap">
+        <img id="book-glider" class="before-mount" src="@/assets/3d-product.png" />
       </div>
     </div>
 
-    <div id="bookmarks">
-      <router-link :to="{ name: 'Home' }">Home</router-link>
-      <router-link id="store" :to="{ name: 'Store' }">Store</router-link>
-      <router-link :to="{ name: 'Product' }">Product</router-link>
-      <router-link :to="{ name: 'About' }">About Us</router-link>
-      <router-link :to="{ name: 'Contact' }">Contact Us</router-link>
-    </div>
-
-    <div id="book-glider-wrap">
-      <img id="book-glider" class="before-mount" src="@/assets/product1.png" />
+    <div v-else>
+      <router-view />
     </div>
 
     <footer>
@@ -77,7 +83,7 @@ export default {
   mounted() {
     setTimeout(function() {
       document.querySelector("#book-glider").classList.remove("before-mount");
-    }, 100);
+    }, 250);
   },
   methods: {
     flipRight() {
@@ -131,16 +137,16 @@ export default {
     nextPage() {
       switch (this.$route.name) {
         case "Home": this.$router.push({ name: 'Store' }); break;
-        case "Store": this.$router.push({ name: 'Product' }); break;
-        case "Product": this.$router.push({ name: 'About' }); break;
+        case "Store": this.$router.push({ name: 'Info' }); break;
+        case "Info": this.$router.push({ name: 'About' }); break;
         case "About": this.$router.push({ name: 'Contact' }); break;
       }
     },
     previousPage() {
       switch (this.$route.name) {
         case "Contact": this.$router.push({ name: 'About' }); break;
-        case "About": this.$router.push({ name: 'Product' }); break;
-        case "Product": this.$router.push({ name: 'Store' }); break;
+        case "About": this.$router.push({ name: 'Info' }); break;
+        case "Info": this.$router.push({ name: 'Store' }); break;
         case "Store": this.$router.push({ name: 'Home' }); break;
       }
     }
@@ -179,6 +185,7 @@ body {
   margin: 0px;
   background-color: lighten($primary-colour, 20%);
   font-family: Varela Round;
+  overflow-x: hidden;
 }
 a {
   color: black;
@@ -197,7 +204,7 @@ a {
     display: flex;
     margin-top: 25px;
     margin-left: calc(15vw - 70px);
-    font-size: 20px;
+    font-size: calc(10px + 0.8vw);
     &#background {
       .left-page, .right-page {
         box-shadow: 0px 20px 50px black;
@@ -227,6 +234,7 @@ a {
       background-color: lighten($primary-colour, 35%);
       transition-timing-function: cubic-bezier(0.5, 0, 1, 0.7);
       z-index: 1;
+      overflow: hidden;
       .break {
         height: 1px;
         background-color: black;
@@ -235,7 +243,7 @@ a {
       }
     }
     .left-page {
-      cursor: url('assets/alias-left.png'), auto;
+      cursor: url('assets/cursors/alias-left.png'), auto;
       transform-origin: right;
       border-radius: 20px 0px 0px 20px;
       transform: skewY(4deg) rotateX(30deg);
@@ -251,7 +259,7 @@ a {
       }
     }
     .right-page {
-      cursor: url('assets/alias-right.png'), auto;
+      cursor: url('assets/cursors/alias-right.png'), auto;
       transform-origin: left;
       border-radius: 0px 20px 20px 0px;
       transform: skewY(-4deg) rotateX(30deg);
@@ -281,10 +289,10 @@ a {
   drop-shadow(0px 8px 0px #bdaa84)
   drop-shadow(0px -5px 10px black);
   top: calc(52.5vh + 25px);
-  left: calc(36vw + 2px);
+  left: calc((100vw - 20vw - 150px) / 2);
   z-index: 9999;
   #book-glider {
-    width: 28vw;
+    width: calc(20vw + 150px);
     transform: scale(1) rotateZ(180deg) rotateX(-80deg) translateY(0px);
     transition-duration: 1s;
     &.flipping, &.before-mount {
@@ -294,8 +302,10 @@ a {
 }
 #bookmarks {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   top: 60px;
-  left: 87%;
+  left: 83.5%;
   font-family: Montserrat;
   text-align: right;
   z-index: 0;
@@ -305,10 +315,11 @@ a {
     color: black;
     text-decoration: none;
     background-color: darken($secondary-colour, 10%);
-    padding: 10px 5px 10px 60px;
+    padding: 10px 5px 10px 100px;
     border-radius: 5px;
     margin-bottom: 25px;
     font-weight: 700;
+    font-size: calc(10px + 0.4vw);
     transform: scale(1);
     transition-duration: 0.3s;
     &#store {
@@ -317,7 +328,7 @@ a {
       padding-right: calc(7.5% + 5px);
     }
     &:hover, &.router-link-exact-active {
-      transform: scale(1.3);
+      transform: scale(1.2);
     }
   }
 }
@@ -346,6 +357,7 @@ footer {
     margin: 0px 5vw;
     width: calc(40px + 10vw);
     .title {
+      text-align: center;
       font-family: Montserrat;
       font-weight: 700;
       color: black;
@@ -365,6 +377,30 @@ footer {
   }
 }
 
+@media (max-width: 1285px) {
+  #bookmarks {
+    left: 83%;
+    a {
+      transform: rotateZ(-15deg);
+      &:hover, &.router-link-exact-active {
+        transform: scale(1.2) rotateZ(-15deg);
+      }
+    }
+  }
+}
+@media (max-width: 1250px) {
+  #bookmarks {
+    a {
+      transform: rotateZ(-30deg);
+      &:hover, &.router-link-exact-active {
+        transform: scale(1.2) rotateZ(-30deg);
+      }
+    }
+  }
+}
+@media (max-width: 1100px) {
+
+}
 @media (max-width: 815px) {
   footer {
     align-items: center;
