@@ -10,6 +10,7 @@
       <img src="@/assets/group-photo.jpg" />
     </div>
     <div class="right">
+      To be completed by the VP of HR
     </div>
   </div>
 </template>

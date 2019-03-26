@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       focusedImageUrl: "close-up",
-      imageUrls: ["close-up", "rose", "book-weight", "rose-top-view", "top-view", "book-shelf"]
+      imageUrls: ["close-up", "rose", "book-weight", "book-shelf", "divergent", "mockingbird"]
     };
   }
 }
@@ -84,6 +84,7 @@ export default {
   .button-wrap {
     text-align: center;
     .button {
+      user-select: none;
       margin-top: 45px;
       margin-bottom: 45px;
       display: inline-block;

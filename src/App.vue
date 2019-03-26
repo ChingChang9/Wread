@@ -72,7 +72,7 @@ export default {
     $route(to, from) {
       if (to.name === "Home" ||
       to.name === "Store" && from.name !== "Home" ||
-      to.name === "Product" && from.name !== "Home" && from.name !== "Store" ||
+      to.name === "Info" && from.name !== "Home" && from.name !== "Store" ||
       to.name === "About" && from.name === "Contact") {
         this.flipLeft();
       } else {
@@ -193,9 +193,6 @@ a {
     color: darken($primary-colour, 20%);
   }
 }
-.title {
-  font-size: calc(22px + 2vw);
-}
 
 #book {
   height: calc(70vh + 105px);
@@ -235,6 +232,9 @@ a {
       transition-timing-function: cubic-bezier(0.5, 0, 1, 0.7);
       z-index: 1;
       overflow: hidden;
+      .title {
+        font-size: calc(22px + 2vw);
+      }
       .break {
         height: 1px;
         background-color: black;
@@ -302,8 +302,6 @@ a {
 }
 #bookmarks {
   position: absolute;
-  display: flex;
-  flex-direction: column;
   top: 60px;
   left: 83.5%;
   font-family: Montserrat;
@@ -345,7 +343,7 @@ footer {
       width: 70%;
     }
     img {
-      width: calc(40% + 30px);
+      width: calc(50% + 50px);
       padding-bottom: 10px;
     }
   }
@@ -378,28 +376,19 @@ footer {
 }
 
 @media (max-width: 1285px) {
-  #bookmarks {
-    left: 83%;
-    a {
-      transform: rotateZ(-15deg);
-      &:hover, &.router-link-exact-active {
-        transform: scale(1.2) rotateZ(-15deg);
-      }
+  #book {
+    .pages {
+      margin-left: calc(10vw - 70px);
     }
   }
-}
-@media (max-width: 1250px) {
+  #book-glider-wrap {
+    left: calc((90vw - 20vw - 150px) / 2);
+  }
   #bookmarks {
-    a {
-      transform: rotateZ(-30deg);
-      &:hover, &.router-link-exact-active {
-        transform: scale(1.2) rotateZ(-30deg);
-      }
-    }
+    left: 78%;
   }
 }
-@media (max-width: 1100px) {
-
+@media (max-width: 930px) {
 }
 @media (max-width: 815px) {
   footer {
@@ -407,6 +396,9 @@ footer {
     flex-direction: column;
     #copyright {
       width: 50vw;
+      img {
+        width: calc(30% + 50px);
+      }
     }
     .column {
       margin-bottom: 20px;
