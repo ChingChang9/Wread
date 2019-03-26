@@ -289,10 +289,8 @@ a {
   top: calc(52.5vh + 25px);
   left: calc((100vw - 20vw - 150px) / 2);
   z-index: 9999;
-  -webkit-transform: translate3d(0, 0, 0);
   #book-glider {
     width: calc(20vw + 150px);
-    -webkit-transform: translate3d(0, 0, 0);
     transform: scale(1) rotateZ(180deg) rotateX(-80deg) translateY(0px);
     transition-duration: 1s;
     &.flipping, &.before-mount {
@@ -307,7 +305,6 @@ a {
   font-family: Montserrat;
   text-align: right;
   z-index: 0;
-  -webkit-transform: translate3d(0, 0, 0);
   transform: skewY(-6deg) rotateX(30deg);
   a {
     display: block;
