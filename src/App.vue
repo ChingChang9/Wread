@@ -193,7 +193,6 @@ a {
 
 #book {
   height: calc(70vh + 105px);
-  -webkit-transform: translate3d(0, 0, 0);
   .pages {
     position: absolute;
     display: flex;
