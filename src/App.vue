@@ -30,7 +30,7 @@
         <router-link id="store" :to="{ name: 'Store' }">Store</router-link>
         <router-link :to="{ name: 'Info' }">Info</router-link>
         <router-link :to="{ name: 'About' }">About Us</router-link>
-        <router-link :to="{ name: 'Contact' }">Contact Us</router-link>
+        <a href="mailto:wreadja@gmail.com">Contact Us</a>
       </div>
 
       <div id="book-glider-wrap">
@@ -72,8 +72,7 @@ export default {
     $route(to, from) {
       if (to.name === "Home" ||
       to.name === "Store" && from.name !== "Home" ||
-      to.name === "Info" && from.name !== "Home" && from.name !== "Store" ||
-      to.name === "About" && from.name === "Contact") {
+      to.name === "Info" && from.name === "About") {
         this.flipLeft();
       } else {
         this.flipRight();
@@ -139,12 +138,10 @@ export default {
         case "Home": this.$router.push({ name: 'Store' }); break;
         case "Store": this.$router.push({ name: 'Info' }); break;
         case "Info": this.$router.push({ name: 'About' }); break;
-        case "About": this.$router.push({ name: 'Contact' }); break;
       }
     },
     previousPage() {
       switch (this.$route.name) {
-        case "Contact": this.$router.push({ name: 'About' }); break;
         case "About": this.$router.push({ name: 'Info' }); break;
         case "Info": this.$router.push({ name: 'Store' }); break;
         case "Store": this.$router.push({ name: 'Home' }); break;
@@ -196,6 +193,7 @@ a {
 
 #book {
   height: calc(70vh + 105px);
+  -webkit-transform: translate3d(0, 0, 0);
   .pages {
     position: absolute;
     display: flex;
@@ -264,7 +262,7 @@ a {
       border-radius: 0px 20px 20px 0px;
       transform: skewY(-4deg) rotateX(30deg);
       &.flipped {
-        transform: skewY(4deg) rotateX(30deg) rotateY(180deg);
+        transform: skewY(4deg) rotateX(30deg) rotateY(-180deg);
         transition-duration: 1s;
       }
       .left {
@@ -291,8 +289,10 @@ a {
   top: calc(52.5vh + 25px);
   left: calc((100vw - 20vw - 150px) / 2);
   z-index: 9999;
+  -webkit-transform: translate3d(0, 0, 0);
   #book-glider {
     width: calc(20vw + 150px);
+    -webkit-transform: translate3d(0, 0, 0);
     transform: scale(1) rotateZ(180deg) rotateX(-80deg) translateY(0px);
     transition-duration: 1s;
     &.flipping, &.before-mount {
@@ -307,6 +307,7 @@ a {
   font-family: Montserrat;
   text-align: right;
   z-index: 0;
+  -webkit-transform: translate3d(0, 0, 0);
   transform: skewY(-6deg) rotateX(30deg);
   a {
     display: block;
