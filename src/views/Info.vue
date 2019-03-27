@@ -32,7 +32,7 @@
         </tr>
         <tr>
           <td>Colour</td>
-          <td>Beige & Tan</td>
+          <td>Beige</td>
         </tr>
         <tr>
           <td>Edge Profile</td>
@@ -52,8 +52,8 @@
         </tr>
       </table>
       <div class="button-wrap">
-        <div v-if="showMetric" class="button" @click="showMetric = !showMetric">Show Metric</div>
-        <div v-else class="button" @click="showMetric = !showMetric">Show Imperial</div>
+        <div v-if="showMetric" class="button" @click="showMetric = !showMetric">Show Imperial</div>
+        <div v-else class="button" @click="showMetric = !showMetric">Show Metric</div>
       </div>
     </div>
     <div class="right">

@@ -1,59 +1,72 @@
 <template>
   <div id="app">
-
-    <div v-if="this.$route.name !== 'Goal'">
-      <div id="book">
-        <div id="background" class="pages">
-          <div class="left-page">
-            <router-view />
-          </div>
-          <div class="right-page">
-            <router-view />
-          </div>
+    <button @click="fill">Show Goal</button>
+    <div id="book">
+      <div id="background" class="pages">
+        <div class="left-page">
+          <router-view />
         </div>
-        <div class="pages">
-          <div class="left-page" @click.self="previousPage">
-            <transition name="left-page" mode="out-in">
-              <router-view />
-            </transition>
-          </div>
-          <div class="right-page" @click.self="nextPage">
-            <transition name="right-page" mode="out-in">
-              <router-view />
-            </transition>
-          </div>
+        <div class="right-page">
+          <router-view />
         </div>
       </div>
-
-      <div id="bookmarks">
-        <router-link :to="{ name: 'Home' }">Home</router-link>
-        <router-link id="store" :to="{ name: 'Store' }">Store</router-link>
-        <router-link :to="{ name: 'Info' }">Info</router-link>
-        <router-link :to="{ name: 'About' }">About Us</router-link>
-        <a href="mailto:wreadja@gmail.com">Contact Us</a>
-      </div>
-
-      <div id="book-glider-wrap">
-        <img id="book-glider" class="before-mount" src="@/assets/3d-product.png" />
+      <div class="pages">
+        <div class="left-page" @click.self="previousPage">
+          <transition name="left-page" mode="out-in">
+            <router-view />
+          </transition>
+        </div>
+        <div class="right-page" @click.self="nextPage">
+          <transition name="right-page" mode="out-in">
+            <router-view />
+          </transition>
+        </div>
       </div>
     </div>
 
-    <div v-else>
-      <router-view />
+    <div id="bookmarks">
+      <router-link :to="{ name: 'Home' }">Home</router-link>
+      <router-link id="store" :to="{ name: 'Store' }">Store</router-link>
+      <router-link :to="{ name: 'Info' }">Info</router-link>
+      <router-link :to="{ name: 'About' }">About Us</router-link>
+      <a href="mailto:wreadja@gmail.com">Contact Us</a>
+    </div>
+
+    <div id="book-glider-wrap">
+      <img id="book-glider" :class="{ hover: showGoal }" src="@/assets/3d-product.png" />
+    </div>
+    <div v-if="showPercentage" id="radial-progress">
+      <div id="circle" @click="fill">
+        <div class="mask">
+          <div class="fill"></div>
+        </div>
+        <div class="mask">
+          <div class="fill"></div>
+          <div id="fix" class="fill"></div>
+        </div>
+        <div id="shadow"></div>
+      </div>
+      <div id="inset">
+        <div v-if="percentage.toString()[1] === '.'" id="percentage">{{ percentage.toString().substring(0, 1) }}%</div>
+        <div v-else id="percentage">{{ percentage.toString().substring(0, 2) }}%</div>
+      </div>
+    </div>
+    <div v-if="showPercentage" id="goal-text-wrap">
+      <div id="goal-text">Our goal this year is to sell 800 units</div>
     </div>
 
     <footer>
       <div class="column">
         <div class="title">Sponsors</div>
-        <a href="https://www.fountaintire.com/" target="_blank" class="text">Fountain Tire</a>
-        <a href="https://www.homedepot.ca/en/home.html" target="_blank" class="text">Home Depot</a>
-        <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank" class="text">Junior Achievement</a>
+        <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
+        <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a>
+        <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
       </div>
       <div class="column">
         <div class="title">Social Links</div>
-        <a href="mailto:wreadja@gmail.com" class="text">Email</a>
-        <a href="https://www.facebook.com/wreadjacompany/?__tn__=%2Cd%2CP-R&eid=ARBPFmfiS-1T2RSFIYa8v0IRt6eObnBxy4UFHb_DtorebZyurXGpYQJ3r9FsH_r1Vpb1JlYhUBxXL1lG" target="_blank" class="text">Facebook</a>
-        <a href="https://www.instagram.com/wread_ja/" target="_blank" class="text">Instagram</a>
+        <a href="mailto:wreadja@gmail.com">Email</a>
+        <a href="https://www.facebook.com/wreadjacompany/?__tn__=%2Cd%2CP-R&eid=ARBPFmfiS-1T2RSFIYa8v0IRt6eObnBxy4UFHb_DtorebZyurXGpYQJ3r9FsH_r1Vpb1JlYhUBxXL1lG" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/wread_ja/" target="_blank">Instagram</a>
       </div>
       <div id="copyright" class="column">
         <div>
@@ -68,6 +81,17 @@
 <script>
 export default {
   name: "App",
+  data() {
+    return {
+      showGoal: true,
+      showPercentage: false,
+      sold: 119,
+      percentage: 0,
+      acceleration: 0.1,
+      intervalID: 0,
+      timeoutID: 0
+    };
+  },
   watch: {
     $route(to, from) {
       if (to.name === "Home" ||
@@ -80,9 +104,13 @@ export default {
     }
   },
   mounted() {
-    setTimeout(function() {
-      document.querySelector("#book-glider").classList.remove("before-mount");
-    }, 250);
+    this.timeoutID = setTimeout(function() {
+      this.showGoal = false;
+    }.bind(this), 750);
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeoutID);
+    clearInterval(this.intervalID);
   },
   methods: {
     flipRight() {
@@ -146,12 +174,39 @@ export default {
         case "Info": this.$router.push({ name: 'Store' }); break;
         case "Store": this.$router.push({ name: 'Home' }); break;
       }
+    },
+    fill() {
+      this.showGoal = !this.showGoal;
+      this.percentage = 0;
+      this.acceleration = 0.1;
+      this.showPercentage = false;
+      if (this.showGoal) {
+        this.timeoutID = setTimeout(function() {
+          this.showPercentage = true;
+          this.intervalID = setInterval(function() {
+            if (this.percentage < this.sold / 800 * 100) {
+              this.percentage += this.acceleration;
+              this.acceleration *= 1.02;
+            } else {
+              this.percentage = this.sold / 800 * 100;
+              clearInterval(this.intervalID);
+            }
+            document.querySelector(".fill").style.transform = `rotate(${ this.percentage * 1.8 }deg)`;
+            document.querySelectorAll(".fill")[1].style.transform = `rotate(${ this.percentage * 1.8 }deg)`;
+            document.querySelector(".mask").style.transform = `rotate(${ this.percentage * 1.8 }deg)`;
+            document.querySelector("#fix").style.transform = `rotate(${ this.percentage * 1.8 * 2 }deg)`;
+          }.bind(this), 10);
+          clearTimeout(this.timeoutID);
+        }.bind(this), 1000);
+      }
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss">
+$circle-size: 15vw;
+
 @font-face {
   font-family: Varela Round;
   src: url('assets/fonts/VarelaRound.ttf');
@@ -180,7 +235,7 @@ export default {
 }
 body {
   margin: 0px;
-  background-color: lighten($primary-colour, 20%);
+  background-color: #888888;
   font-family: Varela Round;
   overflow-x: hidden;
 }
@@ -225,7 +280,7 @@ a {
       height: 70vh;
       padding: 45px 35px;
       border: 2px solid black;
-      background-color: lighten($primary-colour, 35%);
+      background-color: white;
       transition-timing-function: cubic-bezier(0.5, 0, 1, 0.7);
       z-index: 1;
       overflow: hidden;
@@ -292,9 +347,76 @@ a {
     width: calc(20vw + 150px);
     transform: scale(1) rotateZ(180deg) rotateX(-80deg) translateY(0px);
     transition-duration: 1s;
-    &.flipping, &.before-mount {
+    &.flipping {
       transform: scale(1.4) rotateZ(180deg) rotateX(30deg) translateY(-60px);
     }
+    &.hover {
+      transform: scale(2) rotateZ(0deg) rotateX(0deg) translateY(-15vh);
+    }
+  }
+}
+#radial-progress {
+  position: absolute;
+  background-color: #a68f7b;
+  border-radius: 50%;
+  width: $circle-size;
+  height: $circle-size;
+  left: calc((100vw - #{$circle-size}) / 2);
+  top: 23vh;
+  z-index: 9999;
+  #circle {
+    .mask, .fill {
+      position: absolute;
+      border-radius: 50%;
+      width: $circle-size;
+      height: $circle-size;
+    }
+    .mask {
+      clip: rect(0px, $circle-size, $circle-size, $circle-size / 2);
+      .fill {
+        clip: rect(0px, $circle-size / 2, $circle-size, 0px);
+        background-color: black;
+      }
+    }
+  }
+  #shadow {
+    width: $circle-size;
+    height: $circle-size;
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 6px 6px 10px rgba(black, 0.2) inset;
+  }
+  #inset {
+    width: $circle-size / 8 * 7;
+    height: $circle-size / 8 * 7;
+    position: absolute;
+    margin-left: $circle-size / 16;
+    margin-top: $circle-size / 16;
+    background-color: #888888;
+    box-shadow: -5px -5px 10px rgba(black, 0.4) inset;
+    border-radius: 50%;
+    #percentage {
+      color: black;
+      font-size: 4.5vw;
+      font-weight: 800;
+      width: $circle-size / 8 * 7;
+      text-align: center;
+      line-height: 1;
+      overflow: hidden;
+      margin-top: $circle-size / 3.5;
+      margin-left: $circle-size / 32;
+    }
+  }
+}
+#goal-text-wrap {
+  position: absolute;
+  text-align: center;
+  width: 100vw;
+  margin-top: -13vh;
+  z-index: 2;
+  #goal-text {
+    font-size: calc(18px + 2vw);
+    text-shadow: 0px 0px 5px white;
   }
 }
 #bookmarks {
@@ -331,19 +453,7 @@ a {
 footer {
   display: flex;
   padding: 20px 60px;
-  background-color: lighten($secondary-colour, 20%);
-  #copyright {
-    text-align: center;
-    cursor: default;
-    font-size: 13px;
-    div {
-      width: 70%;
-    }
-    img {
-      width: calc(50% + 50px);
-      padding-bottom: 10px;
-    }
-  }
+  background-color: #444444;
   .column {
     display: flex;
     flex-grow: 1;
@@ -351,20 +461,37 @@ footer {
     flex-direction: column;
     margin: 0px 5vw;
     width: calc(40px + 10vw);
+    color: white;
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
+    &#copyright {
+      text-align: center;
+      font-size: 13px;
+      div {
+        width: 70%;
+      }
+      img {
+        width: calc(50% + 50px);
+        padding-bottom: 10px;
+      }
+    }
     .title {
       text-align: center;
       font-family: Montserrat;
       font-weight: 700;
-      color: black;
-      cursor: default;
       font-size: calc(18px + 1vw);
       margin-bottom: 13px;
       letter-spacing: 5px;
     }
-    .text {
+    a {
+      color: white;
       font-size: calc(16px + 0.2vw);
       padding-bottom: 4px;
-      text-decoration: underline;
+      &:hover {
+        color: $primary-colour;
+      }
     }
   }
   img {
@@ -381,11 +508,18 @@ footer {
   #book-glider-wrap {
     left: calc((90vw - 20vw - 150px) / 2);
   }
+  #radial-progress {
+    left: calc((90vw - #{$circle-size}) / 2);
+  }
+  #goal-text-wrap {
+    width: 90vw;
+  }
   #bookmarks {
     left: 78%;
   }
 }
 @media (max-width: 930px) {
+  // optimize for mobile
 }
 @media (max-width: 815px) {
   footer {

@@ -1,11 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import About from "./views/About.vue";
 import Store from "./views/Store.vue";
-import Contact from "./views/Contact.vue";
 import Info from "./views/Info.vue";
-import Goal from "./views/Goal.vue";
+import About from "./views/About.vue";
+import Contact from "./views/Contact.vue";
 import Error from "./views/Error.vue";
 
 Vue.use(Router);
@@ -52,14 +51,6 @@ const router = new Router({
       component: Contact,
       meta: {
         title: "Contact Us - Wread | A JA Company"
-      }
-    },
-    {
-      path: "/goal",
-      name: "Goal",
-      component: Goal,
-      meta: {
-        title: "Goal - Wread | A JA Company"
       }
     },
     {
