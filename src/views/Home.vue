@@ -9,7 +9,9 @@
         Through the hard work of many hands, we give you the joy to read with just one
       </div>
       <div class="break"></div>
-      <video src="@/assets/videos/clip1.mp4" autoplay muted loop></video>
+      <a href="https://www.youtube.com/watch?v=qLNh0edxeeY" target="_blank">
+        <video src="@/assets/videos/clip1.mp4" autoplay muted loop />
+      </a>
       <div class="break"></div>
       <div>
         We strive to promote literacy for all ages, and support the message of spreading knowledge,

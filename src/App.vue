@@ -1,61 +1,96 @@
 <template>
   <div id="app">
-    <button @click="fill">Show Goal</button>
-    <div id="book">
-      <div id="background" class="pages">
-        <div class="left-page">
-          <router-view />
-        </div>
-        <div class="right-page">
-          <router-view />
+    <div id="vote-wrap" :class="{ 'slide-up': hideSurvey }">
+      <div id="vote">
+        <a v-if="screenWidth > 826" href="https://www.surveymonkey.com/r/JDDZ7M7" target="_blank" @click="hideSurvey = !hideSurvey">Help out our company by taking 10 seconds to vote!</a>
+        <a v-else href="https://www.surveymonkey.com/r/JDDZ7M7" target="_blank" @click="hideSurvey = !hideSurvey">Vote in 10 seconds</a>
+        <div>Vote for Wread</div>
+        <div id="arrow" @click="hideSurvey = !hideSurvey">
+          <img id="left" src="@/assets/line.svg" :class="{ 'slide-up': hideSurvey }" />
+          <img id="right" src="@/assets/line.svg" :class="{ 'slide-up': hideSurvey }" />
         </div>
       </div>
-      <div class="pages">
-        <div class="left-page" @click.self="previousPage">
-          <transition name="left-page" mode="out-in">
+    </div>
+
+    <div v-if="screenWidth >= 930">
+
+      <div id="book" :class="{ blur: showGoal }">
+        <div id="background" class="pages">
+          <div class="left-page">
             <router-view />
-          </transition>
-        </div>
-        <div class="right-page" @click.self="nextPage">
-          <transition name="right-page" mode="out-in">
+          </div>
+          <div class="right-page">
             <router-view />
-          </transition>
+          </div>
         </div>
+        <div class="pages">
+          <div class="left-page" @click.self="previousPage">
+            <transition name="left-page" mode="out-in">
+              <router-view />
+            </transition>
+          </div>
+          <div class="right-page" @click.self="nextPage">
+            <transition name="right-page" mode="out-in">
+              <router-view />
+            </transition>
+          </div>
+        </div>
+      </div>
+
+      <div id="bookmarks" :class="{ blur: showGoal }">
+        <router-link :to="{ name: 'Home' }">Home</router-link>
+        <router-link id="store" :to="{ name: 'Store' }">Store</router-link>
+        <router-link :to="{ name: 'Info' }">Info</router-link>
+        <router-link :to="{ name: 'About' }">About Us</router-link>
+        <a href="mailto:wreadja@gmail.com">Contact Us</a>
+      </div>
+
+      <div id="book-glider-wrap">
+        <img id="book-glider" :class="{ float: showGoal }" src="@/assets/3d-product.png" />
+      </div>
+
+      <div v-if="showPercentage" id="radial-progress">
+        <div id="circle">
+          <div class="mask">
+            <div class="fill"></div>
+          </div>
+          <div class="mask">
+            <div class="fill"></div>
+            <div id="fix" class="fill"></div>
+          </div>
+          <div id="shadow"></div>
+        </div>
+        <div id="inset">
+          <div v-if="percentage.toString()[1] === '.'" id="percentage">{{ percentage.toString().substring(0, 1) }}%</div>
+          <div v-else id="percentage">{{ percentage.toString().substring(0, 2) }}%</div>
+        </div>
+      </div>
+      <div v-if="showPercentage" id="goal-text-wrap">
+        <div id="goal-text">Our goal this year is to sell 800 units</div>
+      </div>
+
+      <div id="goal-button" :class="{ blur: showGoal }" @click="toggleShowGoal">Goal</div>
+      <div v-show="showGoal" id="hide-goal" @click="toggleShowGoal"></div>
+    </div>
+
+    <div v-else id="mobile-view">
+      <img id="name" src="@/assets/company-name.png" />
+      <img id="product" src="@/assets/product.png" />
+      <div>
+        Through the hard work of many hands, we give you the joy to read with just one
+      </div>
+      <div class="break"></div>
+      <a href="https://www.youtube.com/watch?v=qLNh0edxeeY" target="_blank">
+        <video src="@/assets/videos/clip1.mp4" autoplay muted loop />
+      </a>
+      <div class="break"></div>
+      <div>
+        We strive to promote literacy for all ages, and support the message of spreading knowledge,
+        communication, and creativity to our world
       </div>
     </div>
 
-    <div id="bookmarks">
-      <router-link :to="{ name: 'Home' }">Home</router-link>
-      <router-link id="store" :to="{ name: 'Store' }">Store</router-link>
-      <router-link :to="{ name: 'Info' }">Info</router-link>
-      <router-link :to="{ name: 'About' }">About Us</router-link>
-      <a href="mailto:wreadja@gmail.com">Contact Us</a>
-    </div>
-
-    <div id="book-glider-wrap">
-      <img id="book-glider" :class="{ hover: showGoal }" src="@/assets/3d-product.png" />
-    </div>
-    <div v-if="showPercentage" id="radial-progress">
-      <div id="circle" @click="fill">
-        <div class="mask">
-          <div class="fill"></div>
-        </div>
-        <div class="mask">
-          <div class="fill"></div>
-          <div id="fix" class="fill"></div>
-        </div>
-        <div id="shadow"></div>
-      </div>
-      <div id="inset">
-        <div v-if="percentage.toString()[1] === '.'" id="percentage">{{ percentage.toString().substring(0, 1) }}%</div>
-        <div v-else id="percentage">{{ percentage.toString().substring(0, 2) }}%</div>
-      </div>
-    </div>
-    <div v-if="showPercentage" id="goal-text-wrap">
-      <div id="goal-text">Our goal this year is to sell 800 units</div>
-    </div>
-
-    <footer>
+    <footer :class="{ blur: showGoal }">
       <div class="column">
         <div class="title">Sponsors</div>
         <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
@@ -85,11 +120,13 @@ export default {
     return {
       showGoal: true,
       showPercentage: false,
-      sold: 119,
+      sold: 124,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
-      timeoutID: 0
+      timeoutID: 0,
+      hideSurvey: true,
+      screenWidth: 0
     };
   },
   watch: {
@@ -104,22 +141,28 @@ export default {
     }
   },
   mounted() {
+    this.scale();
+    window.addEventListener("resize", this.scale);
     this.timeoutID = setTimeout(function() {
       this.showGoal = false;
+      this.timeoutID = setTimeout(function() {
+        this.hideSurvey = false;
+      }.bind(this), 3000);
     }.bind(this), 750);
   },
   beforeDestroy() {
+    window.removeEventListener("resize", this.scale);
     clearTimeout(this.timeoutID);
     clearInterval(this.intervalID);
   },
   methods: {
     flipRight() {
       if (document.styleSheets[0].cssRules[0].style[0] === "font-family") {
-        document.styleSheets[0].cssRules[4].style.transitionDelay = "950ms";
-        document.styleSheets[0].cssRules[5].style.transitionDelay = "770ms";
+        document.styleSheets[0].cssRules[2].style.transitionDelay = "950ms";
+        document.styleSheets[0].cssRules[3].style.transitionDelay = "770ms";
       } else {
-        document.styleSheets[1].cssRules[4].style.transitionDelay = "950ms";
-        document.styleSheets[1].cssRules[5].style.transitionDelay = "770ms";
+        document.styleSheets[1].cssRules[2].style.transitionDelay = "950ms";
+        document.styleSheets[1].cssRules[3].style.transitionDelay = "770ms";
       }
       document.querySelectorAll(".right-page")[1].classList.add("flipped");
       document.querySelector("#book-glider").classList.add("flipping");
@@ -139,11 +182,11 @@ export default {
     },
     flipLeft() {
       if (document.styleSheets[0].cssRules[0].style[0] === "font-family") {
-        document.styleSheets[0].cssRules[4].style.transitionDelay = "770ms";
-        document.styleSheets[0].cssRules[5].style.transitionDelay = "950ms";
+        document.styleSheets[0].cssRules[2].style.transitionDelay = "770ms";
+        document.styleSheets[0].cssRules[3].style.transitionDelay = "950ms";
       } else {
-        document.styleSheets[1].cssRules[4].style.transitionDelay = "770ms";
-        document.styleSheets[1].cssRules[5].style.transitionDelay = "950ms";
+        document.styleSheets[1].cssRules[2].style.transitionDelay = "770ms";
+        document.styleSheets[1].cssRules[3].style.transitionDelay = "950ms";
       }
       document.querySelectorAll(".left-page")[1].classList.add("flipped");
       document.querySelector("#book-glider").classList.add("flipping");
@@ -175,7 +218,7 @@ export default {
         case "Store": this.$router.push({ name: 'Home' }); break;
       }
     },
-    fill() {
+    toggleShowGoal() {
       this.showGoal = !this.showGoal;
       this.percentage = 0;
       this.acceleration = 0.1;
@@ -198,7 +241,12 @@ export default {
           }.bind(this), 10);
           clearTimeout(this.timeoutID);
         }.bind(this), 1000);
+      } else {
+        clearTimeout(this.timeoutID);
       }
+    },
+    scale() {
+      this.screenWidth = window.innerWidth;
     }
   },
 }
@@ -206,25 +254,15 @@ export default {
 
 <style lang="scss">
 $circle-size: 15vw;
-
 @font-face {
-  font-family: Varela Round;
-  src: url('assets/fonts/VarelaRound.ttf');
+  font-family: IBM Plex Serif;
+  src: url('assets/fonts/IBMPlexSerif-Regular.ttf');
+  font-weight: normal;
 }
 @font-face {
-  font-family: Montserrat;
-  src: url('assets/fonts/Montserrat-Medium.ttf');
-  font-weight: 500;
-}
-@font-face {
-  font-family: Montserrat;
-  src: url('assets/fonts/Montserrat-Bold.ttf');
+  font-family: IBM Plex Serif;
+  src: url('assets/fonts/IBMPlexSerif-Bold.ttf');
   font-weight: 700;
-}
-@font-face {
-  font-family: Montserrat;
-  src: url('assets/fonts/Montserrat-ExtraBold.ttf');
-  font-weight: 800;
 }
 
 .left-page-enter-active, .left-page-leave-active {
@@ -236,7 +274,7 @@ $circle-size: 15vw;
 body {
   margin: 0px;
   background-color: #888888;
-  font-family: Varela Round;
+  font-family: IBM Plex Serif;
   overflow-x: hidden;
 }
 a {
@@ -245,13 +283,59 @@ a {
     color: darken($primary-colour, 20%);
   }
 }
+.blur {
+  filter: blur(5px);
+}
 
+#vote-wrap {
+  position: fixed;
+  width: 100vw;
+  text-align: center;
+  z-index: 9999;
+  transition-duration: 1s;
+  opacity: 1;
+  &.slide-up {
+    transform: translateY(-200px);
+    opacity: 0.6;
+  }
+  #vote {
+    background-color: #cccccc;
+    text-align: center;
+    font-size: 33px;
+    padding: 75px 15px 35px 15px;
+    border-radius: 0px 0px 50px 50px;
+    #arrow {
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      #left {
+        transition-duration: 1s;
+        transform: rotateZ(-30deg) translateX(6.5px);
+        &.slide-up {
+          transform: rotateZ(30deg) translateX(13px) translateY(10px);
+        }
+      }
+      #right {
+        transition-duration: 1s;
+        transform: rotateZ(30deg) translateX(-6.5px);
+        &.slide-up {
+          transform: rotateZ(-30deg) translateX(-13px) translateY(10px);
+        }
+      }
+    }
+    div {
+      font-size: 25px;
+      margin-top: 1em;
+    }
+  }
+}
 #book {
-  height: calc(70vh + 105px);
+  height: calc(70vh + 130px);
+  transition-duration: 1s;
   .pages {
     position: absolute;
     display: flex;
-    margin-top: 25px;
+    margin-top: 50px;
     margin-left: calc(15vw - 70px);
     font-size: calc(10px + 0.8vw);
     &#background {
@@ -340,9 +424,9 @@ a {
   drop-shadow(0px 7px 0px #bdaa84)
   drop-shadow(0px 8px 0px #bdaa84)
   drop-shadow(0px -5px 10px black);
-  top: calc(52.5vh + 25px);
+  top: calc(55vh + 25px);
   left: calc((100vw - 20vw - 150px) / 2);
-  z-index: 9999;
+  z-index: 9998;
   #book-glider {
     width: calc(20vw + 150px);
     transform: scale(1) rotateZ(180deg) rotateX(-80deg) translateY(0px);
@@ -350,8 +434,38 @@ a {
     &.flipping {
       transform: scale(1.4) rotateZ(180deg) rotateX(30deg) translateY(-60px);
     }
-    &.hover {
+    &.float {
       transform: scale(2) rotateZ(0deg) rotateX(0deg) translateY(-15vh);
+    }
+  }
+}
+#bookmarks {
+  position: absolute;
+  top: 85px;
+  left: 83.5%;
+  text-align: right;
+  z-index: 0;
+  transform: skewY(-6deg) rotateX(30deg);
+  transition-duration: 1s;
+  a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    background-color: darken($secondary-colour, 10%);
+    padding: 10px 5px 10px 100px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-weight: 700;
+    font-size: calc(10px + 0.4vw);
+    transform: scale(1);
+    transition-duration: 0.3s;
+    &#store {
+      background-color: $orange;
+      clip-path: polygon(0% 0%, 100% 0%, 92.5% 50%, 100% 100%, 0% 100%);
+      padding-right: calc(7.5% + 5px);
+    }
+    &:hover, &.router-link-exact-active {
+      transform: scale(1.2);
     }
   }
 }
@@ -362,8 +476,8 @@ a {
   width: $circle-size;
   height: $circle-size;
   left: calc((100vw - #{$circle-size}) / 2);
-  top: 23vh;
-  z-index: 9999;
+  top: 25vh;
+  z-index: 9998;
   #circle {
     .mask, .fill {
       position: absolute;
@@ -398,7 +512,7 @@ a {
     #percentage {
       color: black;
       font-size: 4.5vw;
-      font-weight: 800;
+      font-weight: 700;
       width: $circle-size / 8 * 7;
       text-align: center;
       line-height: 1;
@@ -412,48 +526,46 @@ a {
   position: absolute;
   text-align: center;
   width: 100vw;
-  margin-top: -13vh;
+  margin-top: -10vh;
   z-index: 2;
   #goal-text {
     font-size: calc(18px + 2vw);
     text-shadow: 0px 0px 5px white;
   }
 }
-#bookmarks {
+#goal-button {
   position: absolute;
-  top: 60px;
-  left: 83.5%;
-  font-family: Montserrat;
-  text-align: right;
-  z-index: 0;
-  transform: skewY(-6deg) rotateX(30deg);
-  a {
-    display: block;
-    color: black;
-    text-decoration: none;
-    background-color: darken($secondary-colour, 10%);
-    padding: 10px 5px 10px 100px;
-    border-radius: 5px;
-    margin-bottom: 25px;
-    font-weight: 700;
-    font-size: calc(10px + 0.4vw);
-    transform: scale(1);
-    transition-duration: 0.3s;
-    &#store {
-      background-color: $orange;
-      clip-path: polygon(0% 0%, 100% 0%, 92.5% 50%, 100% 100%, 0% 100%);
-      padding-right: calc(7.5% + 5px);
-    }
-    &:hover, &.router-link-exact-active {
-      transform: scale(1.2);
-    }
+  background-color: $secondary-colour;
+  text-align: center;
+  font-weight: 700;
+  font-size: 22px;
+  width: 100px;
+  padding: 35px 0px;
+  border-radius: 50%;
+  right: 15px;
+  margin-top: -115px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px black;
+  text-shadow: 1px 1px 10px black;
+  &:hover {
+    transform: translateX(1px) translateY(1px);
+    box-shadow: 1px 1px 5px black;
   }
+}
+#hide-goal {
+  z-index: 2;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
 }
 
 footer {
   display: flex;
   padding: 20px 60px;
   background-color: #444444;
+  transition-duration: 1s;
   .column {
     display: flex;
     flex-grow: 1;
@@ -469,6 +581,7 @@ footer {
     &#copyright {
       text-align: center;
       font-size: 13px;
+      cursor: default;
       div {
         width: 70%;
       }
@@ -479,13 +592,14 @@ footer {
     }
     .title {
       text-align: center;
-      font-family: Montserrat;
       font-weight: 700;
       font-size: calc(18px + 1vw);
       margin-bottom: 13px;
       letter-spacing: 5px;
+      cursor: default;
     }
     a {
+      text-align: center;
       color: white;
       font-size: calc(16px + 0.2vw);
       padding-bottom: 4px;
@@ -496,6 +610,20 @@ footer {
   }
   img {
     width: 30px;
+  }
+}
+
+#mobile-view {
+  font-size: 19px;
+  padding-left: 30px;
+  padding-right: 30px;
+  img {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 50px;
+  }
+  video {
+    width: calc(100vw - 60px);
   }
 }
 
@@ -517,9 +645,6 @@ footer {
   #bookmarks {
     left: 78%;
   }
-}
-@media (max-width: 930px) {
-  // optimize for mobile
 }
 @media (max-width: 815px) {
   footer {

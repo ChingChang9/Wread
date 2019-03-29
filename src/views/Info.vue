@@ -3,28 +3,28 @@
     <div class="left">
       <table>
         <tr v-if="showMetric">
-          <td>Length (±0.5cm)</td>
-          <td>10.5cm</td>
+          <td>Length</td>
+          <td>10.5cm*</td>
         </tr>
         <tr v-else>
-          <td>Length (±0.2")</td>
-          <td>4.1"</td>
+          <td>Length</td>
+          <td>4.1"*</td>
         </tr>
         <tr v-if="showMetric">
-          <td>Width (±0.5cm)</td>
-          <td>5.0cm</td>
+          <td>Width</td>
+          <td>5.0cm*</td>
         </tr>
         <tr v-else>
-          <td>Width (±0.2")</td>
-          <td>2.0"</td>
+          <td>Width</td>
+          <td>2.0"*</td>
         </tr>
         <tr v-if="showMetric">
-          <td>Height (±0.5cm)</td>
-          <td>1.7cm</td>
+          <td>Height</td>
+          <td>1.7cm*</td>
         </tr>
         <tr v-else>
-          <td>Height (±0.2")</td>
-          <td>0.67"</td>
+          <td>Height</td>
+          <td>0.67"*</td>
         </tr>
         <tr>
           <td>Material</td>
@@ -51,6 +51,7 @@
           <td>Yes</td>
         </tr>
       </table>
+      <div>* measurements are approximate</div>
       <div class="button-wrap">
         <div v-if="showMetric" class="button" @click="showMetric = !showMetric">Show Imperial</div>
         <div v-else class="button" @click="showMetric = !showMetric">Show Metric</div>
@@ -83,7 +84,7 @@ table {
   }
 }
 .button-wrap {
-  text-align: center;
+  // text-align: center;
   .button {
     user-select: none;
     margin-top: 25px;
@@ -95,5 +96,8 @@ table {
     border: 2px solid black;
     cursor: pointer;
   }
+}
+img {
+  width: 30%;
 }
 </style>

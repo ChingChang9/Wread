@@ -18,9 +18,9 @@
         <li>Low VOC polish</li>
       </ul>
       <div id="price">
-        <span><span style="font-family: Montserrat; font-weight: 800; text-decoration: underline;">$5.00</span> per glider</span>
+        <span><span style="font-weight: 700; text-decoration: underline;">$5.00</span> per glider</span>
         <span>-or-</span>
-        <span>5 for <span style="font-family: Montserrat; font-weight: 800; text-decoration: underline;">$20.00</span></span>
+        <span>5 for <span style="font-weight: 700; text-decoration: underline;">$20.00</span></span>
       </div>
       <div class="button-wrap">
         <div class="button">
@@ -39,8 +39,8 @@ export default {
   name: "Store",
   data() {
     return {
-      focusedImageUrl: "close-up",
-      imageUrls: ["close-up", "rose", "book-weight", "book-shelf", "divergent", "mockingbird"]
+      focusedImageUrl: "mockingbird",
+      imageUrls: ["mockingbird", "close-up", "book-weight", "rose", "divergent", "book-shelf"]
     };
   }
 }
@@ -72,6 +72,7 @@ export default {
   }
 }
 .right {
+  line-height: 1.2;
   #price {
     text-align: center;
     display: flex;
@@ -96,8 +97,6 @@ export default {
         background-color: $orange;
         padding: 10px;
         border-radius: 10px;
-        font-family: Montserrat;
-        font-weight: 500;
         font-size: calc(18px + 1vw);
         text-decoration: none;
         color: black;
