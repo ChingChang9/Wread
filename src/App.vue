@@ -25,32 +25,42 @@
         </div>
         <div id="background" class="pages">
           <div class="left-page">
-            <router-view />
+            <router-view :selected="selected" />
           </div>
           <div class="right-page">
-            <router-view />
+            <router-view :selected="selected" />
           </div>
         </div>
         <div id="top-page" class="pages">
           <div class="left-page" @click.self="previousPage">
             <transition name="left-page" mode="out-in">
-              <router-view />
+              <router-view :selected="selected" />
             </transition>
           </div>
           <div class="right-page" @click.self="nextPage">
             <transition name="right-page" mode="out-in">
-              <router-view />
+              <router-view :selected="selected" />
             </transition>
           </div>
         </div>
       </div>
 
       <div id="bookmarks" :class="{ blur: showGoal }">
-        <router-link :to="{ name: 'Home' }">Home</router-link>
-        <router-link id="store" :to="{ name: 'Store' }">Store</router-link>
-        <router-link :to="{ name: 'Info' }">Info</router-link>
-        <router-link :to="{ name: 'About' }">About Us</router-link>
-        <a href="mailto:wreadja@gmail.com">Contact Us</a>
+        <router-link v-if="selected === 'English'" :to="{ name: 'Home' }">Home</router-link>
+        <router-link v-else-if="selected === 'Traditional'" :to="{ name: 'Home' }">首頁</router-link>
+        <router-link v-else-if="selected === 'Simplified'" :to="{ name: 'Home' }">首页</router-link>
+        <router-link v-if="selected === 'English'" id="store" :to="{ name: 'Store' }">Store</router-link>
+        <router-link v-else-if="selected === 'Traditional'" id="store" :to="{ name: 'Store' }">商店</router-link>
+        <router-link v-else-if="selected === 'Simplified'" id="store" :to="{ name: 'Store' }">商店</router-link>
+        <router-link v-if="selected === 'English'" :to="{ name: 'Info' }">Info</router-link>
+        <router-link v-else-if="selected === 'Traditional'" :to="{ name: 'Info' }">商品資料</router-link>
+        <router-link v-else-if="selected === 'Simplified'" :to="{ name: 'Info' }">商品资料</router-link>
+        <router-link v-if="selected === 'English'" :to="{ name: 'About' }">About Us</router-link>
+        <router-link v-else-if="selected === 'Traditional'" :to="{ name: 'About' }">關於我們</router-link>
+        <router-link v-else-if="selected === 'Simplified'" :to="{ name: 'About' }">关于我们</router-link>
+        <a v-if="selected === 'English'" href="mailto:wreadja@gmail.com">Contact Us</a>
+        <a v-else-if="selected === 'Traditional'" href="mailto:wreadja@gmail.com">聯絡我們</a>
+        <a v-else-if="selected === 'Simplified'" href="mailto:wreadja@gmail.com">联络我们</a>
       </div>
 
       <div id="book-glider-wrap">
@@ -74,7 +84,9 @@
         </div>
       </div>
       <div v-if="showPercentage" id="goal-text-wrap">
-        <div id="goal-text">Our goal this year is to sell 800 units</div>
+        <div v-if="selected === 'English'" id="goal-text">Our goal this year is to sell 800 units</div>
+        <div v-else-if="selected === 'Traditional'" id="goal-text">我們的目標是要賣800件</div>
+        <div v-else-if="selected === 'Simplified'" id="goal-text">我们的目标是要卖800件</div>
       </div>
 
       <div id="setting" :class="{ blur: showGoal }">
@@ -87,13 +99,16 @@
           <div :class="{ 'selected-language': selected === 'Simplified' }" @click="selected = 'Simplified'">简体中文</div>
         </div>
       </div>
-      <div id="goal-button" :class="{ blur: showGoal }" @click="toggleShowGoal">Goal</div>
+      <div v-if="selected === 'English'" id="goal-button" :class="{ blur: showGoal }" @click="toggleShowGoal">Goal</div>
+      <div v-else-if="selected === 'Traditional'" id="goal-button" :class="{ blur: showGoal }" @click="toggleShowGoal">目標</div>
+      <div v-else-if="selected === 'Simplified'" id="goal-button" :class="{ blur: showGoal }" @click="toggleShowGoal">目标</div>
       <div v-show="showGoal" id="hide-goal" @click="toggleShowGoal"></div>
     </div>
 
     <div v-else id="mobile-view">
       <div id="header">
         <router-link :to="{ name: 'Home' }">
+          <img src="@/assets/icons/logo.svg" />
           <img src="@/assets/company-name.png" />
         </router-link>
         <div class="button">
@@ -117,7 +132,7 @@
           representation, but is also tested to hold books of all sizes. The curves at the bottom is
           architected in a degree that protects the spines of your dearest books.
         </div>
-        <img src="@/assets/product/mockingbird.jpg" />
+        <img src="@/assets/store/mockingbird.jpg" />
       </div>
       <div class="section">
         <div class="title">Materials</div>
@@ -127,7 +142,7 @@
           glue. Our wood is concisely selected to deliver the elegant texture, colour, and mass.
           With minimal volatile organic compounds (VOCs) in our polish, we....
         </div>
-        <img src="@/assets/img2.jpg" />
+        <img src="@/assets/materials.jpg" />
       </div>
       <div class="section">
         <div class="title">Production</div>
@@ -135,19 +150,23 @@
         <div class="text">
           Talk about the 400 grit sandpapers, hand sanded, hand made bags, carefully inspected products
         </div>
-        <img src="@/assets/img1.jpg" />
+        <img src="@/assets/production.jpg" />
       </div>
     </div>
 
     <footer :class="{ blur: showGoal }">
       <div class="column">
-        <div class="title">Sponsors</div>
+        <div v-if="selected === 'English'" class="title">Sponsors</div>
+        <div v-else-if="selected === 'Traditional'" class="title">贊助商</div>
+        <div v-else-if="selected === 'Simplified'" class="title">赞助商</div>
         <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
         <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a>
         <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
       </div>
       <div class="column">
-        <div class="title">Social Links</div>
+        <div v-if="selected === 'English'" class="title">Social Links</div>
+        <div v-else-if="selected === 'Traditional'" class="title">社群連結</div>
+        <div v-else-if="selected === 'Simplified'" class="title">社群连结</div>
         <a href="mailto:wreadja@gmail.com">Email</a>
         <a href="https://www.facebook.com/wreadjacompany/?__tn__=%2Cd%2CP-R&eid=ARBPFmfiS-1T2RSFIYa8v0IRt6eObnBxy4UFHb_DtorebZyurXGpYQJ3r9FsH_r1Vpb1JlYhUBxXL1lG" target="_blank">Facebook</a>
         <a href="https://www.instagram.com/wread_ja/" target="_blank">Instagram</a>
@@ -156,7 +175,9 @@
         <div>
           <router-link :to="{ name: 'Home' }"><img src="@/assets/icons/logo.svg" /></router-link>
         </div>
-        <div>Wread &copy; 2019 Creative Commons - All Rights Reserved</div>
+        <div v-if="selected === 'English'">Wread &copy; 2019 Creative Commons - All Rights Reserved</div>
+        <div v-else-if="selected === 'Traditional'">Wread &copy; 2019 知識共享 - 保留所有權利</div>
+        <div v-else-if="selected === 'Simplified'">Wread &copy; 2019 知识共享 - 保留所有权利</div>
       </div>
     </footer>
   </div>
@@ -671,6 +692,7 @@ footer {
       height: 100%;
       width: auto;
       margin-top: 0px;
+      margin-right: 15px;
     }
     .button {
       user-select: none;

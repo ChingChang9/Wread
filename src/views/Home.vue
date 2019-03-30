@@ -5,17 +5,29 @@
       <img id="company-name" src="@/assets/company-name.png" />
     </div>
     <div class="right">
-      <div>
+      <div v-if="selected === 'English'">
         Through the hard work of many hands, we give you the joy to read with just one
+      </div>
+      <div v-else-if="selected === 'Traditional'">
+        通過許多手的努力，我們給你帶來只需一隻閱讀的愉快
+      </div>
+      <div v-else-if="selected === 'Simplified'">
+        通过许多手的努力，我们给你带来只需一只阅读的愉快
       </div>
       <div class="break"></div>
       <a href="https://www.youtube.com/watch?v=qLNh0edxeeY" target="_blank">
         <video src="@/assets/videos/clip1.mp4" autoplay muted loop />
       </a>
       <div class="break"></div>
-      <div>
+      <div v-if="selected === 'English'">
         We strive to promote literacy for all ages, and support the message of spreading knowledge,
         communication, and creativity to our world
+      </div>
+      <div v-else-if="selected === 'Traditional'">
+        我們努力促進所有年齡段的識字，並支持傳播知識，溝通，和創造我們的世界的信息
+      </div>
+      <div v-else-if="selected === 'Simplified'">
+        我们努力促进所有年龄段的识字，并支持传播知识，沟通，和创造我们的世界的信息
       </div>
     </div>
   </div>
@@ -23,7 +35,10 @@
 
 <script>
 export default {
-  name: "Home"
+  name: "Home",
+  props: {
+    selected: String
+  }
 }
 </script>
 

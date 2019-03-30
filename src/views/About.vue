@@ -1,11 +1,19 @@
 <template>
   <div>
     <div class="left">
-      <div class="title">Mission Statement</div>
+      <div v-if="selected === 'English'" class="title">Mission Statement</div>
+      <div v-else-if="selected === 'Traditional'" class="title">使命宣言</div>
+      <div v-else-if="selected === 'Simplified'" class="title">使命宣言</div>
       <div class="break"></div>
-      <div class="paragraph">
+      <div v-if="selected === 'English'" class="paragraph">
         To care for our world together by creating a path for new opportunities, new smiles, and new
         pages
+      </div>
+      <div v-else-if="selected === 'Traditional'" class="paragraph">
+        為新的微笑，新的機會，和新的書頁創造道路。通過這個道路來共同關心我們的世界
+      </div>
+      <div v-else-if="selected === 'Simplified'" class="paragraph">
+        为新的微笑，新的机会，和新的书页创造道路。通过这个道路来共同关心我们的世界
       </div>
       <img src="@/assets/group-photo.jpg" />
     </div>
@@ -17,7 +25,10 @@
 
 <script>
 export default {
-  name: "About"
+  name: "About",
+  props: {
+    selected: String
+  }
 }
 </script>
 
