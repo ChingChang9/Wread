@@ -1,20 +1,28 @@
 <template>
   <div id="app">
-    <div id="vote-wrap" :class="{ 'slide-up': hideSurvey }">
-      <div id="vote">
-        <a v-if="screenWidth > 826" href="https://www.surveymonkey.com/r/JDDZ7M7" target="_blank" @click="hideSurvey = !hideSurvey">Help out our company by taking 10 seconds to vote!</a>
-        <a v-else href="https://www.surveymonkey.com/r/JDDZ7M7" target="_blank" @click="hideSurvey = !hideSurvey">Vote in 10 seconds</a>
-        <div>Vote for Wread</div>
-        <div id="arrow" @click="hideSurvey = !hideSurvey">
-          <img id="left" src="@/assets/line.svg" :class="{ 'slide-up': hideSurvey }" />
-          <img id="right" src="@/assets/line.svg" :class="{ 'slide-up': hideSurvey }" />
-        </div>
-      </div>
-    </div>
-
-    <div v-if="screenWidth >= 930">
+    <div v-if="screenWidth >= 930 && !isSafari ">
 
       <div id="book" :class="{ blur: showGoal }">
+        <div class="pages" style="margin-top: 45px;">
+          <div class="left-page" style="margin-left: -10px; width: calc(35vw + 6px); box-shadow: 0px 20px 50px black; z-index: -1;"></div>
+          <div class="right-page" style="width: calc(35vw + 8px); box-shadow: 0px 20px 50px black; z-index: -1;"></div>
+        </div>
+        <div class="pages" style="margin-top: 41px;">
+          <div class="left-page" style="margin-left: -8px; width: calc(35vw + 4px); z-index: -1;"></div>
+          <div class="right-page" style="width: calc(35vw + 6px); z-index: -1;"></div>
+        </div>
+        <div class="pages" style="margin-top: 37px;">
+          <div class="left-page" style="margin-left: -6px; width: calc(35vw + 2px); z-index: -1;"></div>
+          <div class="right-page" style="width: calc(35vw + 4px); z-index: -1;"></div>
+        </div>
+        <div class="pages" style="margin-top: 33px;">
+          <div class="left-page" style="margin-left: -4px; width: 35vw;"></div>
+          <div class="right-page" style="width: calc(35vw + 2px);"></div>
+        </div>
+        <div class="pages" style="margin-top: 29px;">
+          <div class="left-page" style="margin-left: -2px; width: calc(35vw - 2px);"></div>
+          <div class="right-page" style="width: 35vw;"></div>
+        </div>
         <div id="background" class="pages">
           <div class="left-page">
             <router-view />
@@ -23,7 +31,7 @@
             <router-view />
           </div>
         </div>
-        <div class="pages">
+        <div id="top-page" class="pages">
           <div class="left-page" @click.self="previousPage">
             <transition name="left-page" mode="out-in">
               <router-view />
@@ -46,7 +54,7 @@
       </div>
 
       <div id="book-glider-wrap">
-        <img id="book-glider" :class="{ float: showGoal }" src="@/assets/3d-product.png" />
+        <img id="book-glider" :class="{ float: showGoal }" src="@/assets/2d-product.png" />
       </div>
 
       <div v-if="showPercentage" id="radial-progress">
@@ -69,24 +77,65 @@
         <div id="goal-text">Our goal this year is to sell 800 units</div>
       </div>
 
+      <div id="setting" :class="{ blur: showGoal }">
+        <img src="@/assets/icons/setting.svg" />
+        <div id="select-language">
+          <div :class="{ 'selected-language': selected === 'English' }" @click="selected = 'English'">English</div>
+          <div :class="{ 'selected-language': selected === 'French' }" @click="selected = 'French'">Français</div>
+          <div :class="{ 'selected-language': selected === 'Spanish' }" @click="selected = 'Spanish'">Español</div>
+          <div :class="{ 'selected-language': selected === 'Traditional' }" @click="selected = 'Traditional'">繁體中文</div>
+          <div :class="{ 'selected-language': selected === 'Simplified' }" @click="selected = 'Simplified'">简体中文</div>
+        </div>
+      </div>
       <div id="goal-button" :class="{ blur: showGoal }" @click="toggleShowGoal">Goal</div>
       <div v-show="showGoal" id="hide-goal" @click="toggleShowGoal"></div>
     </div>
 
     <div v-else id="mobile-view">
-      <img id="name" src="@/assets/company-name.png" />
-      <img id="product" src="@/assets/product.png" />
-      <div>
-        Through the hard work of many hands, we give you the joy to read with just one
+      <div id="header">
+        <router-link :to="{ name: 'Home' }">
+          <img src="@/assets/company-name.png" />
+        </router-link>
+        <div class="button">
+          <a href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">Buy</a>
+        </div>
       </div>
-      <div class="break"></div>
-      <a href="https://www.youtube.com/watch?v=qLNh0edxeeY" target="_blank">
-        <video src="@/assets/videos/clip1.mp4" autoplay muted loop />
-      </a>
-      <div class="break"></div>
-      <div>
-        We strive to promote literacy for all ages, and support the message of spreading knowledge,
-        communication, and creativity to our world
+      <div id="main" class="section">
+        <img id="company-name" src="@/assets/company-name.png" />
+        <img id="product" src="@/assets/3d-product.png" />
+        <div class="text">
+          Through the hard work of many hands, we give you the joy to read with just one.
+          We strive to promote literacy for all ages, and support the message of spreading knowledge,
+          communication, and creativity to our world.
+        </div>
+      </div>
+      <div class="section">
+        <div class="title">Design</div>
+        <div class="subtitle">Enter description here.</div>
+        <div class="text">
+          Our Book Glider features an aesthetic design that not only serves the appeal of its visual
+          representation, but is also tested to hold books of all sizes. The curves at the bottom is
+          architected in a degree that protects the spines of your dearest books.
+        </div>
+        <img src="@/assets/product/mockingbird.jpg" />
+      </div>
+      <div class="section">
+        <div class="title">Materials</div>
+        <div class="subtitle">Locally sourced with the best quality for you and the environment.</div>
+        <div class="text">
+          We package our product with 100% recycled wrapping papers, held together with acid-free
+          glue. Our wood is concisely selected to deliver the elegant texture, colour, and mass.
+          With minimal volatile organic compounds (VOCs) in our polish, we....
+        </div>
+        <img src="@/assets/img2.jpg" />
+      </div>
+      <div class="section">
+        <div class="title">Production</div>
+        <div class="subtitle">Enter description here.</div>
+        <div class="text">
+          Talk about the 400 grit sandpapers, hand sanded, hand made bags, carefully inspected products
+        </div>
+        <img src="@/assets/img1.jpg" />
       </div>
     </div>
 
@@ -125,8 +174,9 @@ export default {
       acceleration: 0.1,
       intervalID: 0,
       timeoutID: 0,
-      hideSurvey: true,
-      screenWidth: 0
+      screenWidth: 0,
+      isSafari: false,
+      selected: "English"
     };
   },
   watch: {
@@ -141,13 +191,13 @@ export default {
     }
   },
   mounted() {
+    if (navigator.userAgent.indexOf("Chrome") === -1 && navigator.userAgent.indexOf("Safari") !== -1) {
+      this.isSafari = true;
+    }
     this.scale();
     window.addEventListener("resize", this.scale);
     this.timeoutID = setTimeout(function() {
       this.showGoal = false;
-      this.timeoutID = setTimeout(function() {
-        this.hideSurvey = false;
-      }.bind(this), 3000);
     }.bind(this), 750);
   },
   beforeDestroy() {
@@ -164,19 +214,19 @@ export default {
         document.styleSheets[1].cssRules[2].style.transitionDelay = "950ms";
         document.styleSheets[1].cssRules[3].style.transitionDelay = "770ms";
       }
-      document.querySelectorAll(".right-page")[1].classList.add("flipped");
+      document.querySelector("#top-page .right-page").classList.add("flipped");
       document.querySelector("#book-glider").classList.add("flipping");
-      document.querySelectorAll(".right-page")[1].style.zIndex = 2;
-      document.querySelectorAll(".left-page")[1].style.zIndex = 1;
+      document.querySelector("#top-page .right-page").style.zIndex = 2;
+      document.querySelector("#top-page .left-page").style.zIndex = 1;
       setTimeout(function() {
-        document.querySelectorAll(".right-page")[1].querySelector(".right").style.display = "none";
-        document.querySelectorAll(".right-page")[1].querySelector(".left").style.display = "block";
-        document.querySelectorAll(".right-page")[1].querySelector(".left").style.transform = "rotateY(180deg)";
+        document.querySelector("#top-page .right-page").querySelector(".right").style.display = "none";
+        document.querySelector("#top-page .right-page").querySelector(".left").style.display = "block";
+        document.querySelector("#top-page .right-page").querySelector(".left").style.transform = "rotateY(180deg)";
       }, 810);
       setTimeout(function() {
-        document.querySelectorAll(".right-page")[1].classList.remove("flipped");
-        document.querySelectorAll(".right-page")[1].querySelector(".left").style.display = "none";
-        document.querySelectorAll(".right-page")[1].querySelector(".right").style.display = "block";
+        document.querySelector("#top-page .right-page").classList.remove("flipped");
+        document.querySelector("#top-page .right-page").querySelector(".left").style.display = "none";
+        document.querySelector("#top-page .right-page").querySelector(".right").style.display = "block";
         document.querySelector("#book-glider").classList.remove("flipping");
       }, 1000);
     },
@@ -188,19 +238,19 @@ export default {
         document.styleSheets[1].cssRules[2].style.transitionDelay = "770ms";
         document.styleSheets[1].cssRules[3].style.transitionDelay = "950ms";
       }
-      document.querySelectorAll(".left-page")[1].classList.add("flipped");
+      document.querySelector("#top-page .left-page").classList.add("flipped");
       document.querySelector("#book-glider").classList.add("flipping");
-      document.querySelectorAll(".left-page")[1].style.zIndex = 2;
-      document.querySelectorAll(".right-page")[1].style.zIndex = 1;
+      document.querySelector("#top-page .left-page").style.zIndex = 2;
+      document.querySelector("#top-page .right-page").style.zIndex = 1;
       setTimeout(function() {
-        document.querySelectorAll(".left-page")[1].querySelector(".left").style.display = "none";
-        document.querySelectorAll(".left-page")[1].querySelector(".right").style.display = "block";
-        document.querySelectorAll(".left-page")[1].querySelector(".right").style.transform = "rotateY(180deg)";
+        document.querySelector("#top-page .left-page").querySelector(".left").style.display = "none";
+        document.querySelector("#top-page .left-page").querySelector(".right").style.display = "block";
+        document.querySelector("#top-page .left-page").querySelector(".right").style.transform = "rotateY(180deg)";
       }, 820);
       setTimeout(function() {
-        document.querySelectorAll(".left-page")[1].classList.remove("flipped");
-        document.querySelectorAll(".left-page")[1].querySelector(".right").style.display = "none";
-        document.querySelectorAll(".left-page")[1].querySelector(".left").style.display = "block";
+        document.querySelector("#top-page .left-page").classList.remove("flipped");
+        document.querySelector("#top-page .left-page").querySelector(".right").style.display = "none";
+        document.querySelector("#top-page .left-page").querySelector(".left").style.display = "block";
         document.querySelector("#book-glider").classList.remove("flipping");
       }, 1000);
     },
@@ -253,7 +303,6 @@ export default {
 </script>
 
 <style lang="scss">
-$circle-size: 15vw;
 @font-face {
   font-family: IBM Plex Serif;
   src: url('assets/fonts/IBMPlexSerif-Regular.ttf');
@@ -273,7 +322,7 @@ $circle-size: 15vw;
 }
 body {
   margin: 0px;
-  background-color: #888888;
+  background-color: #dddddd;
   font-family: IBM Plex Serif;
   overflow-x: hidden;
 }
@@ -287,61 +336,16 @@ a {
   filter: blur(5px);
 }
 
-#vote-wrap {
-  position: fixed;
-  width: 100vw;
-  text-align: center;
-  z-index: 9999;
-  transition-duration: 1s;
-  opacity: 1;
-  &.slide-up {
-    transform: translateY(-200px);
-    opacity: 0.6;
-  }
-  #vote {
-    background-color: #cccccc;
-    text-align: center;
-    font-size: 33px;
-    padding: 75px 15px 35px 15px;
-    border-radius: 0px 0px 50px 50px;
-    #arrow {
-      display: flex;
-      justify-content: center;
-      cursor: pointer;
-      #left {
-        transition-duration: 1s;
-        transform: rotateZ(-30deg) translateX(6.5px);
-        &.slide-up {
-          transform: rotateZ(30deg) translateX(13px) translateY(10px);
-        }
-      }
-      #right {
-        transition-duration: 1s;
-        transform: rotateZ(30deg) translateX(-6.5px);
-        &.slide-up {
-          transform: rotateZ(-30deg) translateX(-13px) translateY(10px);
-        }
-      }
-    }
-    div {
-      font-size: 25px;
-      margin-top: 1em;
-    }
-  }
-}
 #book {
   height: calc(70vh + 130px);
   transition-duration: 1s;
   .pages {
     position: absolute;
     display: flex;
-    margin-top: 50px;
+    margin-top: 25px;
     margin-left: calc(15vw - 70px);
     font-size: calc(10px + 0.8vw);
     &#background {
-      .left-page, .right-page {
-        box-shadow: 0px 20px 50px black;
-      }
       .left-page {
         .left {
           display: block !important;
@@ -364,7 +368,7 @@ a {
       height: 70vh;
       padding: 45px 35px;
       border: 2px solid black;
-      background-color: white;
+      background: url('assets/texture.jpg');
       transition-timing-function: cubic-bezier(0.5, 0, 1, 0.7);
       z-index: 1;
       overflow: hidden;
@@ -379,6 +383,7 @@ a {
       }
     }
     .left-page {
+      border-left: 1px solid black;
       cursor: url('assets/cursors/alias-left.png'), auto;
       transform-origin: right;
       border-radius: 20px 0px 0px 20px;
@@ -395,6 +400,7 @@ a {
       }
     }
     .right-page {
+      border-right: 1px solid black;
       cursor: url('assets/cursors/alias-right.png'), auto;
       transform-origin: left;
       border-radius: 0px 20px 20px 0px;
@@ -424,7 +430,7 @@ a {
   drop-shadow(0px 7px 0px #bdaa84)
   drop-shadow(0px 8px 0px #bdaa84)
   drop-shadow(0px -5px 10px black);
-  top: calc(55vh + 25px);
+  top: 55vh;
   left: calc((100vw - 20vw - 150px) / 2);
   z-index: 9998;
   #book-glider {
@@ -441,8 +447,8 @@ a {
 }
 #bookmarks {
   position: absolute;
-  top: 85px;
-  left: 83.5%;
+  top: 60px;
+  left: 84%;
   text-align: right;
   z-index: 0;
   transform: skewY(-6deg) rotateX(30deg);
@@ -470,13 +476,14 @@ a {
   }
 }
 #radial-progress {
+  $circle-size: calc(75px + 10vw);
   position: absolute;
   background-color: #a68f7b;
   border-radius: 50%;
   width: $circle-size;
   height: $circle-size;
   left: calc((100vw - #{$circle-size}) / 2);
-  top: 25vh;
+  top: calc(60px + 15vh);
   z-index: 9998;
   #circle {
     .mask, .fill {
@@ -486,9 +493,9 @@ a {
       height: $circle-size;
     }
     .mask {
-      clip: rect(0px, $circle-size, $circle-size, $circle-size / 2);
+      clip: rect(0px, $circle-size, $circle-size, calc(#{$circle-size} / 2));
       .fill {
-        clip: rect(0px, $circle-size / 2, $circle-size, 0px);
+        clip: rect(0px, calc(#{$circle-size} / 2), $circle-size, 0px);
         background-color: black;
       }
     }
@@ -498,27 +505,27 @@ a {
     height: $circle-size;
     position: absolute;
     border-radius: 50%;
-    box-shadow: 6px 6px 10px rgba(black, 0.2) inset;
+    box-shadow: inset 6px 6px 10px rgba(black, 0.2);
   }
   #inset {
-    width: $circle-size / 8 * 7;
-    height: $circle-size / 8 * 7;
+    width: calc(#{$circle-size} / 8 * 7);
+    height: calc(#{$circle-size} / 8 * 7);
     position: absolute;
-    margin-left: $circle-size / 16;
-    margin-top: $circle-size / 16;
+    margin-left: calc(#{$circle-size} / 16);
+    margin-top: calc(#{$circle-size} / 16);
     background-color: #888888;
-    box-shadow: -5px -5px 10px rgba(black, 0.4) inset;
+    box-shadow: inset -5px -5px 10px rgba(black, 0.4);
     border-radius: 50%;
     #percentage {
       color: black;
       font-size: 4.5vw;
       font-weight: 700;
-      width: $circle-size / 8 * 7;
+      width: calc(#{$circle-size} / 8 * 7);
       text-align: center;
       line-height: 1;
       overflow: hidden;
-      margin-top: $circle-size / 3.5;
-      margin-left: $circle-size / 32;
+      margin-top: calc(#{$circle-size} / 3.5);
+      margin-left: calc(#{$circle-size} / 32);
     }
   }
 }
@@ -530,7 +537,41 @@ a {
   z-index: 2;
   #goal-text {
     font-size: calc(18px + 2vw);
+    font-weight: 700;
     text-shadow: 0px 0px 5px white;
+  }
+}
+#setting {
+  position: absolute;
+  margin-top: -115px;
+  display: flex;
+  z-index: 5;
+  img {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    filter: drop-shadow(2px 2px 5px black);
+    transition-duration: 1s;
+    &:hover {
+      transform: rotateZ(90deg);
+      ~ #select-language {
+        visibility: visible;
+      }
+    }
+  }
+  #select-language {
+    visibility: hidden;
+    background-color: #aaaaaa;
+    &:hover {
+      visibility: visible;
+    }
+    div {
+      padding: 5px 10px;
+      cursor: pointer;
+      &:hover, &.selected-language {
+        background-color: $secondary-colour;
+      }
+    }
   }
 }
 #goal-button {
@@ -614,16 +655,71 @@ footer {
 }
 
 #mobile-view {
-  font-size: 19px;
   padding-left: 30px;
   padding-right: 30px;
-  img {
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 50px;
+  #header {
+    background-color: #666666;
+    width: calc(100vw - 40px);
+    height: 35px;
+    margin-left: -30px;
+    display: flex;
+    position: fixed;
+    padding: 15px 20px 10px 20px;
+    justify-content: space-between;
+    opacity: 0.8;
+    img {
+      height: 100%;
+      width: auto;
+      margin-top: 0px;
+    }
+    .button {
+      user-select: none;
+      a {
+        background-color: $orange;
+        color: black;
+        padding: 3px 10px;
+        border-radius: 25px;
+        font-size: 21px;
+        text-decoration: none;
+        box-shadow: 1px 2px 5px black;
+        text-shadow: 1px 1px 2px black;
+        &:hover {
+          background-color: darken($orange, 10%);
+        }
+      }
+    }
   }
-  video {
-    width: calc(100vw - 60px);
+  #main {
+    text-align: center;
+    #company-name {
+      width: 75%;
+      max-width: 800px;
+      margin-top: 100px;
+    }
+    #product {
+      width: 90%;
+      margin-top: 40px;
+    }
+  }
+  .section {
+    .title {
+      font-weight: 700;
+      font-size: 52px;
+      margin-bottom: 0.5em;
+    }
+    .subtitle {
+      font-weight: 700;
+      font-size: 26px;
+      margin-bottom: 1em;
+    }
+    .text {
+      font-size: 19px;
+    }
+    margin-bottom: 100px;
+  }
+  img {
+    margin-top: 1em;
+    width: 100%;
   }
 }
 
@@ -637,13 +733,14 @@ footer {
     left: calc((90vw - 20vw - 150px) / 2);
   }
   #radial-progress {
+    $circle-size: calc(75px + 10vw);
     left: calc((90vw - #{$circle-size}) / 2);
   }
   #goal-text-wrap {
     width: 90vw;
   }
   #bookmarks {
-    left: 78%;
+    left: 79.5%;
   }
 }
 @media (max-width: 815px) {

@@ -26,6 +26,14 @@
           <td>Height</td>
           <td>0.67"*</td>
         </tr>
+        <tr v-if="showMetric">
+          <td>Hole Diameter</td>
+          <td>2.5cm*</td>
+        </tr>
+        <tr v-else>
+          <td>Hole Diameter</td>
+          <td>0.98"*</td>
+        </tr>
         <tr>
           <td>Material</td>
           <td>Poplar Wood</td>
@@ -52,13 +60,11 @@
         </tr>
       </table>
       <div>* measurements are approximate</div>
-      <div class="button-wrap">
-        <div v-if="showMetric" class="button" @click="showMetric = !showMetric">Show Imperial</div>
-        <div v-else class="button" @click="showMetric = !showMetric">Show Metric</div>
-      </div>
+      <div v-if="showMetric" class="button" @click="showMetric = !showMetric">Show Imperial</div>
+      <div v-else class="button" @click="showMetric = !showMetric">Show Metric</div>
     </div>
     <div class="right">
-      To be completed by the VP of Marketing and the VP of Health & Safety
+      Talk about the materials that we use and how they are good for both the customer and the environment
     </div>
   </div>
 </template>
@@ -76,6 +82,7 @@ export default {
 
 <style lang="scss" scoped>
 table {
+  font-size: 19px;
   width: 100%;
   border-collapse: collapse;
   td {
@@ -83,19 +90,15 @@ table {
     border: 2px solid black;
   }
 }
-.button-wrap {
-  // text-align: center;
-  .button {
-    user-select: none;
-    margin-top: 25px;
-    display: inline-block;
-    text-align: center;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: calc(12px + 1vw);
-    border: 2px solid black;
-    cursor: pointer;
-  }
+.button {
+  user-select: none;
+  margin-top: 25px;
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid black;
+  cursor: pointer;
 }
 img {
   width: 30%;

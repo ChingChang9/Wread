@@ -10,7 +10,7 @@
       <img src="@/assets/group-photo.jpg" />
     </div>
     <div class="right">
-      To be completed by the VP of HR
+      Talk about volunteering, donations, and a little more about our company
     </div>
   </div>
 </template>

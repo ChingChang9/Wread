@@ -2,7 +2,7 @@
   <div>
     <div class="left">
       <img id="logo" src="@/assets/icons/logo.svg" />
-      <img id="name" src="@/assets/company-name.png" />
+      <img id="company-name" src="@/assets/company-name.png" />
     </div>
     <div class="right">
       <div>
@@ -34,7 +34,7 @@ export default {
     width: 60%;
     margin-bottom: 60px;
   }
-  #name {
+  #company-name {
     width: 75%;
   }
 }
