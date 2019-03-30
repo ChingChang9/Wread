@@ -80,7 +80,13 @@
 
 <script>
 export default {
-  name: "Contact"
+  name: "Contact",
+  props: {
+    selected: {
+      type: String,
+      default: "English"
+    }
+  }
 }
 </script>
 

@@ -8,11 +8,14 @@
       <div v-if="selected === 'English'">
         Through the hard work of many hands, we give you the joy to read with just one
       </div>
+      <div v-else-if="selected === 'French'">
+        Through the hard work of many hands, we give you the joy to read with just one
+      </div>
       <div v-else-if="selected === 'Traditional'">
-        通過許多手的努力，我們給你帶來只需一隻閱讀的愉快
+        通過許多手的努力，我們給你帶來只需用一隻閱讀的愉快
       </div>
       <div v-else-if="selected === 'Simplified'">
-        通过许多手的努力，我们给你带来只需一只阅读的愉快
+        通过许多手的努力，我们给你带来只需用一只阅读的愉快
       </div>
       <div class="break"></div>
       <a href="https://www.youtube.com/watch?v=qLNh0edxeeY" target="_blank">
@@ -20,6 +23,10 @@
       </a>
       <div class="break"></div>
       <div v-if="selected === 'English'">
+        We strive to promote literacy for all ages, and support the message of spreading knowledge,
+        communication, and creativity to our world
+      </div>
+      <div v-else-if="selected === 'French'">
         We strive to promote literacy for all ages, and support the message of spreading knowledge,
         communication, and creativity to our world
       </div>
@@ -37,7 +44,10 @@
 export default {
   name: "Home",
   props: {
-    selected: String
+    selected: {
+      type: String,
+      default: "English"
+    }
   }
 }
 </script>

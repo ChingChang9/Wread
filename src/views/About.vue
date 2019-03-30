@@ -2,12 +2,16 @@
   <div>
     <div class="left">
       <div v-if="selected === 'English'" class="title">Mission Statement</div>
+      <div v-else-if="selected === 'French'" class="title">Déclaration de Mission</div>
       <div v-else-if="selected === 'Traditional'" class="title">使命宣言</div>
       <div v-else-if="selected === 'Simplified'" class="title">使命宣言</div>
       <div class="break"></div>
       <div v-if="selected === 'English'" class="paragraph">
         To care for our world together by creating a path for new opportunities, new smiles, and new
         pages
+      </div>
+      <div v-else-if="selected === 'French'" class="paragraph">
+        Pour les nouvelles opportunités, les nouveaux sourires et les nouveaux pages. Nous pouvons prendre soin du monde ensemble
       </div>
       <div v-else-if="selected === 'Traditional'" class="paragraph">
         為新的微笑，新的機會，和新的書頁創造道路。通過這個道路來共同關心我們的世界
@@ -27,7 +31,10 @@
 export default {
   name: "About",
   props: {
-    selected: String
+    selected: {
+      type: String,
+      default: "English"
+    }
   }
 }
 </script>

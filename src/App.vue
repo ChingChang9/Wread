@@ -47,18 +47,23 @@
 
       <div id="bookmarks" :class="{ blur: showGoal }">
         <router-link v-if="selected === 'English'" :to="{ name: 'Home' }">Home</router-link>
+        <router-link v-else-if="selected === 'French'" :to="{ name: 'Home' }">Page D'accueil</router-link>
         <router-link v-else-if="selected === 'Traditional'" :to="{ name: 'Home' }">首頁</router-link>
         <router-link v-else-if="selected === 'Simplified'" :to="{ name: 'Home' }">首页</router-link>
         <router-link v-if="selected === 'English'" id="store" :to="{ name: 'Store' }">Store</router-link>
+        <router-link v-else-if="selected === 'French'" id="store" :to="{ name: 'Store' }">Le Magasin</router-link>
         <router-link v-else-if="selected === 'Traditional'" id="store" :to="{ name: 'Store' }">商店</router-link>
         <router-link v-else-if="selected === 'Simplified'" id="store" :to="{ name: 'Store' }">商店</router-link>
         <router-link v-if="selected === 'English'" :to="{ name: 'Info' }">Info</router-link>
+        <router-link v-else-if="selected === 'French'" :to="{ name: 'Info' }">Info</router-link>
         <router-link v-else-if="selected === 'Traditional'" :to="{ name: 'Info' }">商品資料</router-link>
         <router-link v-else-if="selected === 'Simplified'" :to="{ name: 'Info' }">商品资料</router-link>
         <router-link v-if="selected === 'English'" :to="{ name: 'About' }">About Us</router-link>
+        <router-link v-else-if="selected === 'French'" :to="{ name: 'About' }">Nos Valeurs</router-link>
         <router-link v-else-if="selected === 'Traditional'" :to="{ name: 'About' }">關於我們</router-link>
         <router-link v-else-if="selected === 'Simplified'" :to="{ name: 'About' }">关于我们</router-link>
         <a v-if="selected === 'English'" href="mailto:wreadja@gmail.com">Contact Us</a>
+        <a v-else-if="selected === 'French'" href="mailto:wreadja@gmail.com">Contactez</a>
         <a v-else-if="selected === 'Traditional'" href="mailto:wreadja@gmail.com">聯絡我們</a>
         <a v-else-if="selected === 'Simplified'" href="mailto:wreadja@gmail.com">联络我们</a>
       </div>
@@ -85,6 +90,7 @@
       </div>
       <div v-if="showPercentage" id="goal-text-wrap">
         <div v-if="selected === 'English'" id="goal-text">Our goal this year is to sell 800 units</div>
+        <div v-else-if="selected === 'French'" id="goal-text">Nous objectif est de vender 800 unités</div>
         <div v-else-if="selected === 'Traditional'" id="goal-text">我們的目標是要賣800件</div>
         <div v-else-if="selected === 'Simplified'" id="goal-text">我们的目标是要卖800件</div>
       </div>
@@ -100,6 +106,7 @@
         </div>
       </div>
       <div v-if="selected === 'English'" id="goal-button" :class="{ blur: showGoal }" @click="toggleShowGoal">Goal</div>
+      <div v-else-if="selected === 'French'" id="goal-button" :class="{ blur: showGoal }" @click="toggleShowGoal">Objectif</div>
       <div v-else-if="selected === 'Traditional'" id="goal-button" :class="{ blur: showGoal }" @click="toggleShowGoal">目標</div>
       <div v-else-if="selected === 'Simplified'" id="goal-button" :class="{ blur: showGoal }" @click="toggleShowGoal">目标</div>
       <div v-show="showGoal" id="hide-goal" @click="toggleShowGoal"></div>
@@ -144,7 +151,7 @@
         </div>
         <img src="@/assets/materials.jpg" />
       </div>
-      <div class="section">
+      <div id="production" class="section">
         <div class="title">Production</div>
         <div class="subtitle">Enter description here.</div>
         <div class="text">
@@ -152,11 +159,21 @@
         </div>
         <img src="@/assets/production.jpg" />
       </div>
+      <div id="about" class="section">
+        <div class="title">What We Do</div>
+        <div class="subtitle">Enter description here.</div>
+        <div class="text">
+          Talk about our mission statement, what we volunteer for, where our revenue goes to, maybe
+          talk about why
+        </div>
+        <img src="@/assets/group-photo.jpg" />
+      </div>
     </div>
 
     <footer :class="{ blur: showGoal }">
       <div class="column">
         <div v-if="selected === 'English'" class="title">Sponsors</div>
+        <div v-else-if="selected === 'French'" class="title">Sponsors</div>
         <div v-else-if="selected === 'Traditional'" class="title">贊助商</div>
         <div v-else-if="selected === 'Simplified'" class="title">赞助商</div>
         <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
@@ -165,6 +182,7 @@
       </div>
       <div class="column">
         <div v-if="selected === 'English'" class="title">Social Links</div>
+        <div v-else-if="selected === 'French'" class="title">Liens Sociaux</div>
         <div v-else-if="selected === 'Traditional'" class="title">社群連結</div>
         <div v-else-if="selected === 'Simplified'" class="title">社群连结</div>
         <a href="mailto:wreadja@gmail.com">Email</a>
@@ -175,9 +193,10 @@
         <div>
           <router-link :to="{ name: 'Home' }"><img src="@/assets/icons/logo.svg" /></router-link>
         </div>
-        <div v-if="selected === 'English'">Wread &copy; 2019 Creative Commons - All Rights Reserved</div>
-        <div v-else-if="selected === 'Traditional'">Wread &copy; 2019 知識共享 - 保留所有權利</div>
-        <div v-else-if="selected === 'Simplified'">Wread &copy; 2019 知识共享 - 保留所有权利</div>
+        <div v-if="selected === 'English'">Wread &copy; 2019 Creative Commons — All Rights Reserved</div>
+        <div v-else-if="selected === 'French'">Wread &copy; 2019 Creative Commons — Tous Droits Réservés</div>
+        <div v-else-if="selected === 'Traditional'">Wread &copy; 2019 知識共享 — 保留所有權利</div>
+        <div v-else-if="selected === 'Simplified'">Wread &copy; 2019 知识共享 — 保留所有权利</div>
       </div>
     </footer>
   </div>
@@ -450,7 +469,7 @@ a {
   drop-shadow(0px 6px 0px #bdaa84)
   drop-shadow(0px 7px 0px #bdaa84)
   drop-shadow(0px 8px 0px #bdaa84)
-  drop-shadow(0px -5px 10px black);
+  drop-shadow(0px 5px 10px black);
   top: 55vh;
   left: calc((100vw - 20vw - 150px) / 2);
   z-index: 9998;
@@ -683,7 +702,6 @@ footer {
     width: calc(100vw - 40px);
     height: 35px;
     margin-left: -30px;
-    display: flex;
     position: fixed;
     padding: 15px 20px 10px 20px;
     justify-content: space-between;
@@ -696,6 +714,7 @@ footer {
     }
     .button {
       user-select: none;
+      float: right;
       a {
         background-color: $orange;
         color: black;
@@ -712,7 +731,10 @@ footer {
     }
   }
   #main {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
     #company-name {
       width: 75%;
       max-width: 800px;
@@ -722,6 +744,9 @@ footer {
       width: 90%;
       margin-top: 40px;
     }
+    .text {
+      text-align: center;
+    }
   }
   .section {
     .title {
@@ -730,21 +755,55 @@ footer {
       margin-bottom: 0.5em;
     }
     .subtitle {
+      max-width: 735px;
       font-weight: 700;
       font-size: 26px;
       margin-bottom: 1em;
     }
     .text {
+      max-width: 735px;
       font-size: 19px;
     }
-    margin-bottom: 100px;
+    margin-bottom: 95px;
   }
   img {
     margin-top: 1em;
     width: 100%;
+    max-width: 755px;
   }
 }
 
+@media (min-width: 930px) {
+  #mobile-view {
+    #main {
+      .text {
+        float: none;
+      }
+    }
+    #production {
+      .title {
+        float: right;
+      }
+    }
+    #about {
+      text-align: center;
+    }
+    .section {
+      .title {
+        font-size: 160px;
+      }
+      .subtitle {
+        float: left;
+        font-size: 48px;
+      }
+      .text {
+        float: right;
+        font-size: 24px;
+      }
+      margin-bottom: 150px;
+    }
+  }
+}
 @media (max-width: 1285px) {
   #book {
     .pages {
