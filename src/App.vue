@@ -4,24 +4,24 @@
 
       <div id="book" :class="{ blur: showGoal }">
         <div class="pages" style="margin-top: 45px;">
-          <div class="left-page" style="margin-left: -10px; width: calc(35vw + 6px); box-shadow: 0px 20px 50px black; z-index: -1;"></div>
-          <div class="right-page" style="width: calc(35vw + 8px); box-shadow: 0px 20px 50px black; z-index: -1;"></div>
+          <div class="left-page" style="margin-left: -10px; width: calc(35vw + 6px); box-shadow: 0px 20px 50px black; z-index: -1;" @click.self="previousPage"></div>
+          <div class="right-page" style="width: calc(35vw + 8px); box-shadow: 0px 20px 50px black; z-index: -1;" @click.self="nextPage"></div>
         </div>
         <div class="pages" style="margin-top: 41px;">
-          <div class="left-page" style="margin-left: -8px; width: calc(35vw + 4px); z-index: -1;"></div>
-          <div class="right-page" style="width: calc(35vw + 6px); z-index: -1;"></div>
+          <div class="left-page" style="margin-left: -8px; width: calc(35vw + 4px); z-index: -1;" @click.self="previousPage"></div>
+          <div class="right-page" style="width: calc(35vw + 6px); z-index: -1;" @click.self="nextPage"></div>
         </div>
         <div class="pages" style="margin-top: 37px;">
-          <div class="left-page" style="margin-left: -6px; width: calc(35vw + 2px); z-index: -1;"></div>
-          <div class="right-page" style="width: calc(35vw + 4px); z-index: -1;"></div>
+          <div class="left-page" style="margin-left: -6px; width: calc(35vw + 2px); z-index: -1;" @click.self="previousPage"></div>
+          <div class="right-page" style="width: calc(35vw + 4px); z-index: -1;" @click.self="nextPage"></div>
         </div>
         <div class="pages" style="margin-top: 33px;">
-          <div class="left-page" style="margin-left: -4px; width: 35vw;"></div>
-          <div class="right-page" style="width: calc(35vw + 2px);"></div>
+          <div class="left-page" style="margin-left: -4px; width: 35vw;" @click.self="previousPage"></div>
+          <div class="right-page" style="width: calc(35vw + 2px);" @click.self="nextPage"></div>
         </div>
         <div class="pages" style="margin-top: 29px;">
-          <div class="left-page" style="margin-left: -2px; width: calc(35vw - 2px);"></div>
-          <div class="right-page" style="width: 35vw;"></div>
+          <div class="left-page" style="margin-left: -2px; width: calc(35vw - 2px);" @click.self="previousPage"></div>
+          <div class="right-page" style="width: 35vw;" @click.self="nextPage"></div>
         </div>
         <div id="background" class="pages">
           <div class="left-page">
@@ -100,7 +100,6 @@
         <div id="select-language">
           <div :class="{ 'selected-language': selected === 'English' }" @click="selected = 'English'">English</div>
           <div :class="{ 'selected-language': selected === 'French' }" @click="selected = 'French'">Français</div>
-          <div :class="{ 'selected-language': selected === 'Spanish' }" @click="selected = 'Spanish'">Español</div>
           <div :class="{ 'selected-language': selected === 'Traditional' }" @click="selected = 'Traditional'">繁體中文</div>
           <div :class="{ 'selected-language': selected === 'Simplified' }" @click="selected = 'Simplified'">简体中文</div>
         </div>
@@ -126,18 +125,18 @@
         <img id="company-name" src="@/assets/company-name.png" />
         <img id="product" src="@/assets/product/3d-product.jpg" />
         <div class="text">
-          Through the hard work of many hands, we give you the joy to read with just one.
-          We strive to promote literacy for all ages, and support the message of spreading knowledge,
-          communication, and creativity to our world.
+          With a mission statement to care for our world together by creating a path for new opportunities,
+          new smiles, and new pages, we strive to promote literacy for all ages, and support the
+          message of spreading knowledge, communication, and creativity to our world.
         </div>
       </div>
       <div class="section">
         <div class="title">Design</div>
-        <div class="subtitle">Enter description here.</div>
+        <div class="subtitle">Provides comfort and ease with a modern shape.</div>
         <div class="text">
           Our Book Glider features an aesthetic design that not only serves the appeal of its visual
-          representation, but is also tested to hold books of all sizes. The curves at the bottom is
-          architected in a degree that protects the spines of your dearest books.
+          representation, but is also tested to hold books of all sizes. The curves at the bottom
+          are architected in a degree that protects the spines of your dearest books.
         </div>
         <img src="@/assets/store/mockingbird.jpg" />
       </div>
@@ -153,7 +152,7 @@
       </div>
       <div id="production" class="section">
         <div class="title">Production</div>
-        <div class="subtitle">Enter description here.</div>
+        <div class="subtitle">Through the hard work of many hands, we give you the joy of reading with just one.</div>
         <div class="text">
           Talk about the 400 grit sandpapers, hand sanded, hand made bags, carefully inspected products
         </div>
@@ -163,8 +162,7 @@
         <div class="title">What We Do</div>
         <div class="subtitle">Enter description here.</div>
         <div class="text">
-          Talk about our mission statement, what we volunteer for, where our revenue goes to, maybe
-          talk about why
+          Talk about our what we volunteer for, what we do (#trashtag), and who we donate to
         </div>
         <img src="@/assets/photos/group-photo.jpg" />
       </div>
@@ -584,6 +582,7 @@ a {
 #setting {
   position: absolute;
   margin-top: -115px;
+  margin-left: 10px;
   display: flex;
   z-index: 5;
   img {

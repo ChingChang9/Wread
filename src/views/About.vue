@@ -23,7 +23,7 @@
       <img src="@/assets/photos/group-photo.jpg" />
     </div>
     <div class="right">
-      Talk about volunteering, donations, and a little more about our company
+      Talk about our what we volunteer for, what we do (#trashtag), and who we donate to
     </div>
   </div>
 </template>

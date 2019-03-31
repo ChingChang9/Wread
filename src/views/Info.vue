@@ -133,7 +133,12 @@
       <div v-else-if="selected === 'Simplified'" class="button" @click="showMetric = !showMetric">展示公分</div>
     </div>
     <div class="right">
-      Talk about the materials that we use and how they are good for both the customer and the environment
+      <div class="big-text">Our materials are locally sourced with the best quality for you and the environment.</div>
+      <img src="@/assets/photos/materials.jpg" />
+      We package our product with 100% recycled wrapping papers, held together with acid-free
+      glue. Our wood is concisely selected to deliver the elegant texture, colour, and mass.
+      With minimal volatile organic compounds (VOCs) in our polish, we....
+      <img src="@/assets/photos/production.jpg" style="float: right;" />
     </div>
   </div>
 </template>
@@ -175,7 +180,15 @@ table {
   border: 2px solid black;
   cursor: pointer;
 }
+.big-text {
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
 img {
-  width: 30%;
+  width: 42.5%;
+  display: block;
+  float: left;
+  margin-top: 0.5em;
+  margin-right: 0.5em;
 }
 </style>
