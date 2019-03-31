@@ -20,7 +20,7 @@
       <div v-else-if="selected === 'Simplified'" class="paragraph">
         为新的微笑，新的机会，和新的书页创造道路。通过这个道路来共同关心我们的世界
       </div>
-      <img src="@/assets/group-photo.jpg" />
+      <img src="@/assets/photos/group-photo.jpg" />
     </div>
     <div class="right">
       Talk about volunteering, donations, and a little more about our company

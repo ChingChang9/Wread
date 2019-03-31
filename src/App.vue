@@ -69,7 +69,7 @@
       </div>
 
       <div id="book-glider-wrap">
-        <img id="book-glider" :class="{ float: showGoal }" src="@/assets/2d-product.png" />
+        <img id="book-glider" :class="{ float: showGoal }" src="@/assets/product/2d-product.png" />
       </div>
 
       <div v-if="showPercentage" id="radial-progress">
@@ -124,7 +124,7 @@
       </div>
       <div id="main" class="section">
         <img id="company-name" src="@/assets/company-name.png" />
-        <img id="product" src="@/assets/3d-product.png" />
+        <img id="product" src="@/assets/product/3d-product.jpg" />
         <div class="text">
           Through the hard work of many hands, we give you the joy to read with just one.
           We strive to promote literacy for all ages, and support the message of spreading knowledge,
@@ -149,7 +149,7 @@
           glue. Our wood is concisely selected to deliver the elegant texture, colour, and mass.
           With minimal volatile organic compounds (VOCs) in our polish, we....
         </div>
-        <img src="@/assets/materials.jpg" />
+        <img src="@/assets/photos/materials.jpg" />
       </div>
       <div id="production" class="section">
         <div class="title">Production</div>
@@ -157,7 +157,7 @@
         <div class="text">
           Talk about the 400 grit sandpapers, hand sanded, hand made bags, carefully inspected products
         </div>
-        <img src="@/assets/production.jpg" />
+        <img src="@/assets/photos/production.jpg" />
       </div>
       <div id="about" class="section">
         <div class="title">What We Do</div>
@@ -166,7 +166,7 @@
           Talk about our mission statement, what we volunteer for, where our revenue goes to, maybe
           talk about why
         </div>
-        <img src="@/assets/group-photo.jpg" />
+        <img src="@/assets/photos/group-photo.jpg" />
       </div>
     </div>
 
