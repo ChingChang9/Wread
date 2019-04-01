@@ -145,7 +145,7 @@
         <div class="subtitle">Locally sourced with the best quality for you and the environment.</div>
         <div class="text">
           We package our product with 100% recycled wrapping papers, held together with acid-free
-          glue. Our wood is concisely selected to deliver the elegant texture, colour, and mass.
+          glue. Our wood is precisely selected to deliver the elegant texture, colour, and mass.
           With minimal volatile organic compounds (VOCs) in our polish, we....
         </div>
         <img src="@/assets/photos/materials.jpg" />
@@ -207,7 +207,7 @@ export default {
     return {
       showGoal: true,
       showPercentage: false,
-      sold: 124,
+      sold: 125,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
