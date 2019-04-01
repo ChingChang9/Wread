@@ -177,6 +177,7 @@
         <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
         <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a>
         <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
+        <a href="http://plantforever.org/" target="_blank">PlantForever</a>
       </div>
       <div class="column">
         <div v-if="selected === 'English'" class="title">Social Links</div>
@@ -655,6 +656,7 @@ footer {
     width: calc(40px + 10vw);
     color: white;
     opacity: 0.5;
+    transition: 0.3s;
     &:hover {
       opacity: 1;
     }
