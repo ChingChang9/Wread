@@ -4,8 +4,6 @@ import Home from "./views/Home.vue";
 import Store from "./views/Store.vue";
 import Info from "./views/Info.vue";
 import About from "./views/About.vue";
-import Contact from "./views/Contact.vue";
-import Error from "./views/Error.vue";
 
 Vue.use(Router);
 
@@ -48,14 +46,14 @@ const router = new Router({
     {
       path: "/contact",
       name: "Contact",
-      component: Contact,
+      component: () => import("./views/Contact.vue"),
       meta: {
         title: "Contact Us - Wread | A JA Company"
       }
     },
     {
       path: "*",
-      component: Error,
+      component: () => import("./views/Error.vue"),
       meta: {
         title: "Page Not Found"
       }

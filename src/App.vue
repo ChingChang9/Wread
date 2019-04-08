@@ -140,7 +140,7 @@
         </div>
         <img src="@/assets/store/mockingbird.jpg" />
       </div>
-      <div class="section">
+      <div id="materials" class="section">
         <div class="title">Materials</div>
         <div class="subtitle">Locally sourced with the best quality for you and the environment.</div>
         <div class="text">
@@ -208,7 +208,7 @@ export default {
     return {
       showGoal: true,
       showPercentage: false,
-      sold: 179,
+      sold: 260,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
@@ -756,13 +756,13 @@ footer {
       margin-bottom: 0.5em;
     }
     .subtitle {
-      max-width: 735px;
+      max-width: 45%;
       font-weight: 700;
       font-size: 26px;
       margin-bottom: 1em;
     }
     .text {
-      max-width: 735px;
+      max-width: 45%;
       font-size: 19px;
     }
     margin-bottom: 95px;
@@ -781,7 +781,7 @@ footer {
         float: none;
       }
     }
-    #production {
+    #materials, #production {
       .title {
         float: right;
       }
@@ -795,10 +795,12 @@ footer {
       }
       .subtitle {
         float: left;
+        margin: 0px 2.5%;
         font-size: 48px;
       }
       .text {
         float: right;
+        margin: 0px 2.5%;
         font-size: 24px;
       }
       margin-bottom: 150px;

@@ -90,7 +90,7 @@
         </tr>
         <tr>
           <td v-if="selected === 'English'">Finish</td>
-          <td v-else-if="selected === 'French'"></td>
+          <td v-else-if="selected === 'French'">Bois Poli</td>
           <td v-else-if="selected === 'Traditional'">上蠟</td>
           <td v-else-if="selected === 'Simplified'">上蜡</td>
           <td v-if="selected === 'English'">Yes</td>
