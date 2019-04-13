@@ -208,7 +208,7 @@ export default {
     return {
       showGoal: true,
       showPercentage: false,
-      sold: 260,
+      sold: 360,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
@@ -756,13 +756,11 @@ footer {
       margin-bottom: 0.5em;
     }
     .subtitle {
-      max-width: 45%;
       font-weight: 700;
       font-size: 26px;
       margin-bottom: 1em;
     }
     .text {
-      max-width: 45%;
       font-size: 19px;
     }
     margin-bottom: 95px;
@@ -778,7 +776,7 @@ footer {
   #mobile-view {
     #main {
       .text {
-        float: none;
+        max-width: 90%;
       }
     }
     #materials, #production {
@@ -794,11 +792,13 @@ footer {
         font-size: 160px;
       }
       .subtitle {
+        max-width: 45%;
         float: left;
         margin: 0px 2.5%;
         font-size: 48px;
       }
       .text {
+        max-width: 45%;
         float: right;
         margin: 0px 2.5%;
         font-size: 24px;
