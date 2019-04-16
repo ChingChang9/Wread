@@ -146,7 +146,8 @@
         <div class="text">
           We package our product with 100% recycled wrapping papers, held together with acid-free
           glue. Our wood is precisely selected to deliver the elegant texture, colour, and mass.
-          With minimal volatile organic compounds (VOCs) in our polish, we....
+          With minimal volatile organic compounds (VOCs) in our polish, we utilize every opportunity
+          to make the most eco-friendly decisions
         </div>
         <img src="@/assets/photos/materials.jpg" />
       </div>
@@ -154,15 +155,28 @@
         <div class="title">Production</div>
         <div class="subtitle">Through the hard work of many hands, we give you the joy of reading with just one.</div>
         <div class="text">
-          Talk about the 400 grit sandpapers, hand sanded, hand made bags, carefully inspected products
+          Our production is designed so that products of the utmost quality are created. We
+          carefully inspect every unit to ensure it meets the quality we promise you. After cutting
+          the poplar wood, we hand-sand the product with sandpapers with a range of roughness to
+          create a spotless smooth surface. To match our fine product, our packaging parallels our
+          product as we create our handmade origami bags with care and precision
         </div>
         <img src="@/assets/photos/production.jpg" />
       </div>
       <div id="about" class="section">
         <div class="title">What We Do</div>
-        <div class="subtitle">Enter description here.</div>
+        <div class="subtitle">We are passionate about the change our product creates in the world</div>
         <div class="text">
-          Talk about our what we volunteer for, what we do (#trashtag), and who we donate to
+          Every product sold results in the plantation of two seeds, as we aim to increase awareness
+          of environmental degradation to the world. We are running <strong>#trashtag</strong>
+          through which we ameliorate our environment by picking up trash by the street, and sharing
+          our action on social medias to encourage others to follow our footsteps
+        </div>
+        <img src="@/assets/photos/trashtag.jpg" />
+        <div class="text">
+          Not only do we believe that the environment must be protected, the education for every
+          child is also a priority of ours. This is why we commit 12% of our revenue to support the
+          Stollery Children’s Hospital
         </div>
         <img src="@/assets/photos/group-photo.jpg" />
       </div>
