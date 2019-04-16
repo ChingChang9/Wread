@@ -165,7 +165,7 @@
       </div>
       <div id="about" class="section">
         <div class="title">What We Do</div>
-        <div class="subtitle">We are passionate about the change our product creates in the world</div>
+        <div class="subtitle">We are passionate about the change our product creates in the world.</div>
         <div class="text">
           Every product sold results in the plantation of two seeds, as we aim to increase awareness
           of environmental degradation to the world. We are running <strong>#trashtag</strong>

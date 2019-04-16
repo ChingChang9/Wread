@@ -26,6 +26,10 @@
         <li v-else-if="selected === 'French'">Design esthétique, protège la colonne vertébrale du livre</li>
         <li v-else-if="selected === 'Traditional'">充滿藝術的設計，保護書脊</li>
         <li v-else-if="selected === 'Simplified'">充满艺术的设计，保护书脊</li>
+        <li v-if="selected === 'English'">Handmade origami bags</li>
+        <li v-else-if="selected === 'French'">Sacs en origami faits à la main</li>
+        <li v-else-if="selected === 'Traditional'">手工摺紙袋</li>
+        <li v-else-if="selected === 'Simplified'">手工折纸袋</li>
         <li v-if="selected === 'English'">Sustainable materials, 100% recycled materials for packaging</li>
         <li v-else-if="selected === 'French'">Matériaux durables, 100% de matériaux recyclés pour l'emballage</li>
         <li v-else-if="selected === 'Traditional'">環保的材料，包裝利用百分之百回收的材料</li>

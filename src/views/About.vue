@@ -23,7 +23,55 @@
       <img src="@/assets/photos/group-photo.jpg" />
     </div>
     <div class="right">
-      Talk about our what we volunteer for, what we do (#trashtag), and who we donate to
+      <div v-if="selected === 'English'" class="big-text">We are passionate about the change our product creates in the world.</div>
+      <div v-else-if="selected === 'French'" class="big-text">We are passionate about the change our product creates in the world.</div>
+      <div v-else-if="selected === 'Traditional'" class="big-text">We are passionate about the change our product creates in the world.</div>
+      <div v-else-if="selected === 'Simplified'" class="big-text">We are passionate about the change our product creates in the world.</div>
+      <div v-if="selected === 'English'">
+        Every product sold results in the plantation of two seeds, as we aim to increase awareness
+        of environmental degradation to the world. We are running <strong>#trashtag</strong>
+        through which we ameliorate our environment by picking up trash by the street, and sharing
+        our action on social medias to encourage others to follow our footsteps.
+      </div>
+      <div v-else-if="selected === 'French'">
+        Every product sold results in the plantation of two seeds, as we aim to increase awareness
+        of environmental degradation to the world. We are running <strong>#trashtag</strong>
+        through which we ameliorate our environment by picking up trash by the street, and sharing
+        our action on social medias to encourage others to follow our footsteps.
+      </div>
+      <div v-else-if="selected === 'Traditional'">
+        Every product sold results in the plantation of two seeds, as we aim to increase awareness
+        of environmental degradation to the world. We are running <strong>#trashtag</strong>
+        through which we ameliorate our environment by picking up trash by the street, and sharing
+        our action on social medias to encourage others to follow our footsteps.
+      </div>
+      <div v-else-if="selected === 'Simplified'">
+        Every product sold results in the plantation of two seeds, as we aim to increase awareness
+        of environmental degradation to the world. We are running <strong>#trashtag</strong>
+        through which we ameliorate our environment by picking up trash by the street, and sharing
+        our action on social medias to encourage others to follow our footsteps.
+      </div>
+      <img src="@/assets/photos/trashtag.jpg" />
+      <div v-if="selected === 'English'">
+        Not only do we believe that the environment must be protected, the education for every
+        child is also a priority of ours. This is why we commit 12% of our revenue to support the
+        Stollery Children’s Hospital
+      </div>
+      <div v-else-if="selected === 'French'">
+        Not only do we believe that the environment must be protected, the education for every
+        child is also a priority of ours. This is why we commit 12% of our revenue to support the
+        Stollery Children’s Hospital
+      </div>
+      <div v-else-if="selected === 'Traditional'">
+        Not only do we believe that the environment must be protected, the education for every
+        child is also a priority of ours. This is why we commit 12% of our revenue to support the
+        Stollery Children’s Hospital
+      </div>
+      <div v-else-if="selected === 'Simplified'">
+        Not only do we believe that the environment must be protected, the education for every
+        child is also a priority of ours. This is why we commit 12% of our revenue to support the
+        Stollery Children’s Hospital
+      </div>
     </div>
   </div>
 </template>
@@ -47,6 +95,19 @@ export default {
     width: 100%;
     border: 2px solid black;
     transform: rotateY(180deg);
+  }
+}
+.right {
+  .big-text {
+    font-weight: 700;
+    margin-bottom: 0.5em;
+  }
+  img {
+    width: 42.5%;
+    display: block;
+    float: left;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
   }
 }
 </style>

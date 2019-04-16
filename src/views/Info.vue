@@ -133,11 +133,35 @@
       <div v-else-if="selected === 'Simplified'" class="button" @click="showMetric = !showMetric">展示公分</div>
     </div>
     <div class="right">
-      <div class="big-text">Our materials are locally sourced with the best quality for you and the environment.</div>
+      <div v-if="selected === 'English'" class="big-text">Our materials are locally sourced with the best quality for you and the environment.</div>
+      <div v-else-if="selected === 'French'" class="big-text">Our materials are locally sourced with the best quality for you and the environment.</div>
+      <div v-else-if="selected === 'Traditional'" class="big-text">Our materials are locally sourced with the best quality for you and the environment.</div>
+      <div v-else-if="selected === 'Simplified'" class="big-text">Our materials are locally sourced with the best quality for you and the environment.</div>
       <img src="@/assets/photos/materials.jpg" />
-      We package our product with 100% recycled wrapping papers, held together with acid-free
-      glue. Our wood is precisely selected to deliver the elegant texture, colour, and mass.
-      With minimal volatile organic compounds (VOCs) in our polish, we....
+      <div v-if="selected === 'English'">
+        We package our product with 100% recycled wrapping papers, held together with acid-free glue.
+        Our wood is precisely selected to deliver the elegant texture, colour, and mass. With minimal
+        volatile organic compounds (VOCs) in our polish, we utilize every opportunity to make the most
+        eco-friendly decisions
+      </div>
+      <div v-else-if="selected === 'French'">
+        We package our product with 100% recycled wrapping papers, held together with acid-free glue.
+        Our wood is precisely selected to deliver the elegant texture, colour, and mass. With minimal
+        volatile organic compounds (VOCs) in our polish, we utilize every opportunity to make the most
+        eco-friendly decisions
+      </div>
+      <div v-else-if="selected === 'Traditional'">
+        We package our product with 100% recycled wrapping papers, held together with acid-free glue.
+        Our wood is precisely selected to deliver the elegant texture, colour, and mass. With minimal
+        volatile organic compounds (VOCs) in our polish, we utilize every opportunity to make the most
+        eco-friendly decisions
+      </div>
+      <div v-else-if="selected === 'Simplified'">
+        We package our product with 100% recycled wrapping papers, held together with acid-free glue.
+        Our wood is precisely selected to deliver the elegant texture, colour, and mass. With minimal
+        volatile organic compounds (VOCs) in our polish, we utilize every opportunity to make the most
+        eco-friendly decisions
+      </div>
       <img src="@/assets/photos/production.jpg" style="float: right;" />
     </div>
   </div>
