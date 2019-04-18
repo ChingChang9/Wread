@@ -27,7 +27,7 @@
         <li v-else-if="selected === 'Traditional'">充滿藝術的設計，保護書脊</li>
         <li v-else-if="selected === 'Simplified'">充满艺术的设计，保护书脊</li>
         <li v-if="selected === 'English'">Handmade origami bags</li>
-        <li v-else-if="selected === 'French'">Sacs en origami faits à la main</li>
+        <!-- <li v-else-if="selected === 'French'">Sacs en origami faits à la main</li> -->
         <li v-else-if="selected === 'Traditional'">手工摺紙袋</li>
         <li v-else-if="selected === 'Simplified'">手工折纸袋</li>
         <li v-if="selected === 'English'">Sustainable materials, 100% recycled materials for packaging</li>

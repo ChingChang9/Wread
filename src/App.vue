@@ -142,12 +142,12 @@
       </div>
       <div id="materials" class="section">
         <div class="title">Materials</div>
-        <div class="subtitle">Locally sourced with the best quality for you and the environment.</div>
+        <div class="subtitle">Locally sourced with the best quality for you and the planet.</div>
         <div class="text">
-          We package our product with 100% recycled wrapping papers, held together with acid-free
-          glue. Our wood is precisely selected to deliver the elegant texture, colour, and mass.
-          With minimal volatile organic compounds (VOCs) in our polish, we utilize every opportunity
-          to make the most eco-friendly decisions
+          We package our product with 100% recycled wrapping paper, held together with acid-free
+          glue. Our wood is precisely selected to deliver elegant texture, colour, and mass. With
+          minimal volatile organic compounds (VOCs) in our polish, we utilize every opportunity to
+          make the most eco-friendly decisions.
         </div>
         <img src="@/assets/photos/materials.jpg" />
       </div>
@@ -155,11 +155,11 @@
         <div class="title">Production</div>
         <div class="subtitle">Through the hard work of many hands, we give you the joy of reading with just one.</div>
         <div class="text">
-          Our production is designed so that products of the utmost quality are created. We
+          Our production steps are designed so that products of the utmost quality are created. We
           carefully inspect every unit to ensure it meets the quality we promise you. After cutting
           the poplar wood, we hand-sand the product with sandpapers with a range of roughness to
-          create a spotless smooth surface. To match our fine product, our packaging parallels our
-          product as we create our handmade origami bags with care and precision
+          create a spotless smooth surface. To match our fine workmanship, our packaging parallels
+          our product as we create our handmade origami bags with care and precision.
         </div>
         <img src="@/assets/photos/production.jpg" />
       </div>
@@ -169,14 +169,14 @@
         <div class="text">
           Every product sold results in the plantation of two seeds, as we aim to increase awareness
           of environmental degradation to the world. We are running <strong>#trashtag</strong>
-          through which we ameliorate our environment by picking up trash by the street, and sharing
-          our action on social medias to encourage others to follow our footsteps
+          through which we improve our environment by picking up trash on the street and sharing
+          our action on social media to encourage others to follow in our footsteps.
         </div>
         <img src="@/assets/photos/trashtag.jpg" />
         <div class="text">
-          Not only do we believe that the environment must be protected, the education for every
+          Not only do we believe that the environment must be protected, the wellness for every
           child is also a priority of ours. This is why we commit 12% of our revenue to support the
-          Stollery Children’s Hospital
+          Stollery Children’s Hospital.
         </div>
         <img src="@/assets/photos/group-photo.jpg" />
       </div>
@@ -191,7 +191,7 @@
         <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
         <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a>
         <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
-        <a href="http://plantforever.org/" target="_blank">PlantForever</a>
+        <a href="https://plantforever.org/" target="_blank">PlantForever</a>
       </div>
       <div class="column">
         <div v-if="selected === 'English'" class="title">Social Links</div>
@@ -857,6 +857,13 @@ footer {
       .title {
         margin-bottom: 0px;
       }
+    }
+  }
+}
+@media (max-height: 700px) {
+  #book {
+    .pages {
+      font-size: calc(10px + 0.6vw);
     }
   }
 }

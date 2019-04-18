@@ -59,7 +59,7 @@ export default {
   text-align: center;
   #logo {
     width: 60%;
-    margin-bottom: 60px;
+    margin-bottom: 8vh;
   }
   #company-name {
     width: 75%;
@@ -68,6 +68,12 @@ export default {
 .right {
   video {
     width: 100%;
+  }
+}
+
+@media (max-height: 700px) {
+  .right {
+    text-align: center;
   }
 }
 </style>
