@@ -117,9 +117,9 @@
           <img src="@/assets/icons/logo.svg" />
           <img src="@/assets/company-name.png" />
         </router-link>
-        <div class="button">
+        <!-- <div class="button">
           <a href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">Buy</a>
-        </div>
+        </div> -->
       </div>
       <div id="main" class="section">
         <img id="company-name" src="@/assets/company-name.png" />
@@ -222,7 +222,7 @@ export default {
     return {
       showGoal: true,
       showPercentage: false,
-      sold: 425,
+      sold: 448,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
