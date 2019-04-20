@@ -53,14 +53,14 @@
         <span v-else-if="selected === 'Traditional'">5件 <span style="font-weight: 700; text-decoration: underline;">$20.00</span></span>
         <span v-else-if="selected === 'Simplified'">5件 <span style="font-weight: 700; text-decoration: underline;">$20.00</span></span>
       </div>
-      <!-- <div class="button-wrap">
+      <div class="button-wrap">
         <div class="button">
           <a v-if="selected === 'English'" href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">Buy Now</a>
           <a v-else-if="selected === 'French'" href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">Achetez maintenant</a>
           <a v-else-if="selected === 'Traditional'" href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">立即購買</a>
           <a v-else-if="selected === 'Simplified'" href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">立即购买</a>
         </div>
-      </div> -->
+      </div>
       <div v-if="selected === 'English'" class="description">
         All of our materials are locally sourced in an environmentally responsible manner
       </div>
