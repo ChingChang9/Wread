@@ -191,7 +191,6 @@
         <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
         <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a>
         <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
-        <a href="https://plantforever.org/" target="_blank">PlantForever</a>
       </div>
       <div class="column">
         <div v-if="selected === 'English'" class="title">Social Links</div>
@@ -222,7 +221,7 @@ export default {
     return {
       showGoal: true,
       showPercentage: false,
-      sold: 425,
+      sold: 469,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
