@@ -188,9 +188,9 @@
         <div v-else-if="selected === 'French'" class="title">Sponsors</div>
         <div v-else-if="selected === 'Traditional'" class="title">贊助商</div>
         <div v-else-if="selected === 'Simplified'" class="title">赞助商</div>
+        <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
         <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
         <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a>
-        <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
       </div>
       <div class="column">
         <div v-if="selected === 'English'" class="title">Social Links</div>
@@ -221,7 +221,7 @@ export default {
     return {
       showGoal: true,
       showPercentage: false,
-      sold: 469,
+      sold: 530,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
