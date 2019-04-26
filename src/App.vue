@@ -190,6 +190,7 @@
         <div v-else-if="selected === 'Simplified'" class="title">赞助商</div>
         <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
         <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
+        <a href="https://emeraldfoundation.ca/" target="_blank">Alberta Emerald Foundation</a>
         <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a>
       </div>
       <div class="column">
@@ -221,7 +222,7 @@ export default {
     return {
       showGoal: true,
       showPercentage: false,
-      sold: 530,
+      sold: 547,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
