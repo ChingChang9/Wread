@@ -222,7 +222,7 @@ export default {
     return {
       showGoal: true,
       showPercentage: false,
-      sold: 547,
+      sold: 597,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
