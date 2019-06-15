@@ -11,7 +11,6 @@
         <a href="mailto:chingtheprogrammer@icloud.com">chingtheprogrammer@icloud.com</a>
         <div class="job-title">
           <div>VP of Production</div>
-          <div>Web Developer</div>
         </div>
       </div>
       <div class="person">
@@ -19,7 +18,6 @@
         <a href="mailto:m.singh38@share.epsb.ca">m.singh38@share.epsb.ca</a>
         <div class="job-title">
           <div>VP of IT</div>
-          <div>Production Assistant</div>
         </div>
       </div>
       <div class="person">
@@ -37,17 +35,17 @@
         <a href="mailto:jerryfu6158@gmail.com">jerryfu6158@gmail.com</a>
         <div class="job-title">VP of HR</div>
       </div>
-      <div class="person">
-        <div class="name">Gabriel Taranger</div>
-        <a href="mailto:taranger1011@outlook.com">taranger1011@outlook.com</a>
-        <div class="job-title">VP of Marketing</div>
-      </div>
     </div>
     <div class="right">
       <div class="person">
         <div class="name">Ryaad Asif</div>
         <a href="mailto:asif.fabian@gmail.com">asif.fabian@gmail.com</a>
         <div class="job-title">Social Media Manager</div>
+      </div>
+      <div class="person">
+        <div class="name">Gabriel Taranger</div>
+        <a href="mailto:taranger1011@outlook.com">taranger1011@outlook.com</a>
+        <div class="job-title">VP of Marketing</div>
       </div>
       <div class="person">
         <div class="name">Marcus Taranger</div>
@@ -62,16 +60,6 @@
       <div class="person">
         <div class="name">Jason Liao</div>
         <a href="mailto:jasonliaoca@gmail.com">jasonliaoca@gmail.com</a>
-        <div class="job-title">Employee</div>
-      </div>
-      <div class="person">
-        <div class="name">Caide Sundal</div>
-        <a href="mailto:hands@thesundals.ca">hands@thesundals.ca</a>
-        <div class="job-title">Employee</div>
-      </div>
-      <div class="person">
-        <div class="name">Carsen Sundal</div>
-        <a href="mailto:csundal@telus.net">csundal@telus.net</a>
         <div class="job-title">Employee</div>
       </div>
     </div>

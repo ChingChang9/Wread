@@ -85,7 +85,8 @@
         </div>
         <div id="inset">
           <div v-if="percentage.toString()[1] === '.'" id="percentage">{{ percentage.toString().substring(0, 1) }}%</div>
-          <div v-else id="percentage">{{ percentage.toString().substring(0, 2) }}%</div>
+          <div v-else-if="percentage.toString()[2] === '.'" id="percentage">{{ percentage.toString().substring(0, 2) }}%</div>
+          <div v-else id="percentage">{{ percentage.toString().substring(0, 3) }}%</div>
         </div>
       </div>
       <div v-if="showPercentage" id="goal-text-wrap">
@@ -222,7 +223,7 @@ export default {
     return {
       showGoal: true,
       showPercentage: false,
-      sold: 871,
+      sold: 885,
       percentage: 0,
       acceleration: 0.1,
       intervalID: 0,
@@ -337,10 +338,18 @@ export default {
               this.percentage = this.sold / 800 * 100;
               clearInterval(this.intervalID);
             }
-            document.querySelector(".fill").style.transform = `rotate(${ this.percentage * 1.8 }deg)`;
-            document.querySelectorAll(".fill")[1].style.transform = `rotate(${ this.percentage * 1.8 }deg)`;
-            document.querySelector(".mask").style.transform = `rotate(${ this.percentage * 1.8 }deg)`;
-            document.querySelector("#fix").style.transform = `rotate(${ this.percentage * 1.8 * 2 }deg)`;
+            if (this.percentage < 100) {
+              document.querySelector(".fill").style.transform = `rotate(${ this.percentage * 1.8 }deg)`;
+              document.querySelectorAll(".fill")[1].style.transform = `rotate(${ this.percentage * 1.8 }deg)`;
+              document.querySelector(".mask").style.transform = `rotate(${ this.percentage * 1.8 }deg)`;
+              document.querySelector("#fix").style.transform = `rotate(${ this.percentage * 1.8 * 2 }deg)`;
+            } else {
+              document.querySelector("#radial-progress").style.backgroundColor = "#00FF00";
+              document.querySelector(".fill").style.transform = `rotate(180deg)`;
+              document.querySelectorAll(".fill")[1].style.transform = `rotate(${ -180 + (this.percentage - 100) * 1.8 * 2 }deg)`;
+              document.querySelector(".mask").style.transform = `rotate(180deg)`;
+              document.querySelector("#fix").style.transform = `rotate(360deg)`;
+            }
           }.bind(this), 10);
           clearTimeout(this.timeoutID);
         }.bind(this), 1000);
