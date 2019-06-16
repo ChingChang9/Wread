@@ -20,7 +20,7 @@
       </div>
       <div class="break"></div>
       <a href="https://www.youtube.com/watch?v=qLNh0edxeeY" target="_blank">
-        <video src="@/assets/videos/clip1.mp4" autoplay muted loop />
+        <video src="@/assets/videos/commercial-clip.mp4" autoplay muted loop />
       </a>
       <div class="break"></div>
       <div v-if="selected === 'English'">

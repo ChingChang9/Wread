@@ -344,7 +344,7 @@ export default {
               document.querySelector(".mask").style.transform = `rotate(${ this.percentage * 1.8 }deg)`;
               document.querySelector("#fix").style.transform = `rotate(${ this.percentage * 1.8 * 2 }deg)`;
             } else {
-              document.querySelector("#radial-progress").style.backgroundColor = "#00FF00";
+              document.querySelector("#radial-progress").style.backgroundColor = "#92dd3c";
               document.querySelector(".fill").style.transform = `rotate(180deg)`;
               document.querySelectorAll(".fill")[1].style.transform = `rotate(${ -180 + (this.percentage - 100) * 1.8 * 2 }deg)`;
               document.querySelector(".mask").style.transform = `rotate(180deg)`;
