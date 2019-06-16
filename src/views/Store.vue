@@ -89,7 +89,7 @@ export default {
   data() {
     return {
       focusedImageUrl: "mockingbird",
-      imageUrls: ["mockingbird", "close-up", "book-weight", "rose", "divergent", "book-shelf"]
+      imageUrls: ["mockingbird", "close-up", "hand", "rose", "divergent", "book-shelf"]
     };
   }
 }
