@@ -16,7 +16,7 @@ const router = new Router({
       name: "Home",
       component: Home,
       meta: {
-        title: "Home - Wread | A JA Company"
+        title: "Home – Wread | A JA Company"
       }
     },
     {
@@ -24,7 +24,7 @@ const router = new Router({
       name: "Store",
       component: Store,
       meta: {
-        title: "Store - Wread | A JA Company"
+        title: "Store – Wread | A JA Company"
       }
     },
     {
@@ -32,7 +32,7 @@ const router = new Router({
       name: "Info",
       component: Info,
       meta: {
-        title: "Info - Wread | A JA Company"
+        title: "Info – Wread | A JA Company"
       }
     },
     {
@@ -40,7 +40,7 @@ const router = new Router({
       name: "About",
       component: About,
       meta: {
-        title: "About Us - Wread | A JA Company"
+        title: "About Us – Wread | A JA Company"
       }
     },
     {
@@ -48,11 +48,12 @@ const router = new Router({
       name: "Contact",
       component: () => import("./views/Contact.vue"),
       meta: {
-        title: "Contact Us - Wread | A JA Company"
+        title: "Contact Us – Wread | A JA Company"
       }
     },
     {
       path: "*",
+      name: "Error",
       component: () => import("./views/Error.vue"),
       meta: {
         title: "Page Not Found"
