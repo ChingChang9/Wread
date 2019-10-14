@@ -189,13 +189,10 @@
         <div v-else-if="selected === 'French'" class="title">Sponsors</div>
         <div v-else-if="selected === 'Traditional'" class="title">贊助商</div>
         <div v-else-if="selected === 'Simplified'" class="title">赞助商</div>
-        <!-- <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
+        <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
         <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
         <a href="https://emeraldfoundation.ca/" target="_blank">Alberta Emerald Foundation</a>
-        <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a> -->
-        <a href="https://www.noggin-clontith.com" target="_blank">Ching Chang, Founder of 🅱️🅱️C</a>
-        <a href="https://www.noggin-clontith.com" target="_blank">Jason Liao, CEO of UR MOM</a>
-        <a href="https://www.noggin-clontith.com" target="_blank">🅱️erktan Demiruz, Most Volunteer Hours (42069 hours)</a>
+        <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a>
       </div>
       <div class="column">
         <div v-if="selected === 'English'" class="title">Social Links</div>
