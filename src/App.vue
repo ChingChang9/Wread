@@ -367,12 +367,12 @@ export default {
 <style lang="scss">
 @font-face {
   font-family: IBM Plex Serif;
-  src: url('assets/fonts/IBMPlexSerif-Regular.ttf');
+  src: url("assets/fonts/IBMPlexSerif-Regular.ttf");
   font-weight: normal;
 }
 @font-face {
   font-family: IBM Plex Serif;
-  src: url('assets/fonts/IBMPlexSerif-Bold.ttf');
+  src: url("assets/fonts/IBMPlexSerif-Bold.ttf");
   font-weight: 700;
 }
 
@@ -385,7 +385,7 @@ export default {
 body {
   margin: 0px;
   background-color: #dddddd;
-  font-family: IBM Plex Serif;
+  font-family: IBM Plex Serif, serif;
   overflow-x: hidden;
 }
 a {
