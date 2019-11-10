@@ -54,11 +54,11 @@
         <span v-else-if="selected === 'Simplified'">5件 <span style="font-weight: 700; text-decoration: underline;">$20.00</span></span>
       </div>
       <div class="button-wrap">
-        <div class="button">
-          <a v-if="selected === 'English'" href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">Buy Now</a>
-          <a v-else-if="selected === 'French'" href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">Achetez maintenant</a>
-          <a v-else-if="selected === 'Traditional'" href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">立即購買</a>
-          <a v-else-if="selected === 'Simplified'" href="https://forms.gle/JqbwNo6fNtKcqA1S6" target="_blank">立即购买</a>
+        <div class="button" @click="alert">
+          <a v-if="selected === 'English'">Buy Now</a>
+          <a v-else-if="selected === 'French'">Achetez maintenant</a>
+          <a v-else-if="selected === 'Traditional'">立即購買</a>
+          <a v-else-if="selected === 'Simplified'">立即购买</a>
         </div>
       </div>
       <div v-if="selected === 'English'" class="description">
@@ -91,6 +91,16 @@ export default {
       focusedImageUrl: "mockingbird",
       imageUrls: ["mockingbird", "close-up", "hand", "rose", "divergent", "book-shelf"]
     };
+  },
+  methods: {
+    alert() {
+      switch(this.selected) {
+        case "English": alert("We are out of stock. Sorry for the inconvenience."); break;
+        case "French": alert("Nous sommes en rupture de stock. Désolé pour le dérangement."); break;
+        case "Traditional": alert("我們沒貨了。抱歉給你帶來不便。"); break;
+        case "Simplified": alert("我们没货了。抱歉给你带来不便。"); break;
+      }
+    }
   }
 }
 </script>
@@ -139,6 +149,7 @@ export default {
       margin-bottom: 45px;
       display: inline-block;
       text-align: center;
+      cursor: pointer;
       &:hover {
         transform: scale(1.05);
       }

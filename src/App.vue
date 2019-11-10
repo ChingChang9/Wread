@@ -62,10 +62,10 @@
         <router-link v-else-if="selected === 'French'" :to="{ name: 'About' }">Nos Valeurs</router-link>
         <router-link v-else-if="selected === 'Traditional'" :to="{ name: 'About' }">關於我們</router-link>
         <router-link v-else-if="selected === 'Simplified'" :to="{ name: 'About' }">关于我们</router-link>
-        <a v-if="selected === 'English'" href="mailto:chingtheprogrammer@gmail.com" target="_blank">Contact Us</a>
-        <a v-else-if="selected === 'French'" href="mailto:chingtheprogrammer@gmail.com" target="_blank">Contactez</a>
-        <a v-else-if="selected === 'Traditional'" href="mailto:chingtheprogrammer@gmail.com" target="_blank">聯絡我們</a>
-        <a v-else-if="selected === 'Simplified'" href="mailto:chingtheprogrammer@gmail.com" target="_blank">联络我们</a>
+        <router-link v-if="selected === 'English'" :to="{ name: 'Contact' }">Contact Us</router-link>
+        <router-link v-else-if="selected === 'French'" :to="{ name: 'Contact' }">Contactez</router-link>
+        <router-link v-else-if="selected === 'Traditional'" :to="{ name: 'Contact' }">聯絡我們</router-link>
+        <router-link v-else-if="selected === 'Simplified'" :to="{ name: 'Contact' }">联络我们</router-link>
       </div>
 
       <div id="book-glider-wrap">
@@ -184,26 +184,27 @@
     </div>
 
     <footer :class="{ blur: showGoal }">
-      <div class="column">
-        <div v-if="selected === 'English'" class="title">Sponsors</div>
-        <div v-else-if="selected === 'French'" class="title">Sponsors</div>
-        <div v-else-if="selected === 'Traditional'" class="title">贊助商</div>
-        <div v-else-if="selected === 'Simplified'" class="title">赞助商</div>
-        <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
-        <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
-        <a href="https://emeraldfoundation.ca/" target="_blank">Alberta Emerald Foundation</a>
-        <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a>
-      </div>
-      <div class="column">
-        <div v-if="selected === 'English'" class="title">Social Links</div>
-        <div v-else-if="selected === 'French'" class="title">Liens Sociaux</div>
-        <div v-else-if="selected === 'Traditional'" class="title">社群連結</div>
-        <div v-else-if="selected === 'Simplified'" class="title">社群连结</div>
-        <a href="mailto:chingtheprogrammer@gmail.com" target="_blank">Email</a>
-        <a href="https://www.facebook.com/wreadjacompany/?__tn__=%2Cd%2CP-R&eid=ARBPFmfiS-1T2RSFIYa8v0IRt6eObnBxy4UFHb_DtorebZyurXGpYQJ3r9FsH_r1Vpb1JlYhUBxXL1lG" target="_blank">Facebook</a>
-        <a href="https://www.instagram.com/wread_ja/" target="_blank">Instagram</a>
-      </div>
-      <div id="copyright" class="column">
+      <div class="links">
+        <div class="column">
+          <div v-if="selected === 'English'" class="title">Sponsors</div>
+          <div v-else-if="selected === 'French'" class="title">Sponsors</div>
+          <div v-else-if="selected === 'Traditional'" class="title">贊助商</div>
+          <div v-else-if="selected === 'Simplified'" class="title">赞助商</div>
+          <a href="https://janorthalberta.org/company-program-students/company-program/" target="_blank">Junior Achievement</a>
+          <a href="https://www.fountaintire.com/" target="_blank">Fountain Tire</a>
+          <a href="https://emeraldfoundation.ca/" target="_blank">Alberta Emerald Foundation</a>
+          <a href="https://www.homedepot.ca/en/home.html" target="_blank">Home Depot</a>
+        </div>
+        <div class="column">
+          <div v-if="selected === 'English'" class="title">Social Links</div>
+          <div v-else-if="selected === 'French'" class="title">Liens Sociaux</div>
+          <div v-else-if="selected === 'Traditional'" class="title">社群連結</div>
+          <div v-else-if="selected === 'Simplified'" class="title">社群连结</div>
+          <a href="mailto:chingtheprogrammer@gmail.com" target="_blank">Email</a>
+          <a href="https://www.facebook.com/wreadjacompany/?__tn__=%2Cd%2CP-R&eid=ARBPFmfiS-1T2RSFIYa8v0IRt6eObnBxy4UFHb_DtorebZyurXGpYQJ3r9FsH_r1Vpb1JlYhUBxXL1lG" target="_blank">Facebook</a>
+          <a href="https://www.instagram.com/wread_ja/" target="_blank">Instagram</a>
+        </div>
+        <div id="copyright" class="column">
         <div>
           <router-link :to="{ name: 'Home' }"><img src="@/assets/icons/logo.svg" /></router-link>
         </div>
@@ -211,6 +212,10 @@
         <div v-else-if="selected === 'French'">Wread &copy; 2019 Creative Commons — Tous Droits Réservés</div>
         <div v-else-if="selected === 'Traditional'">Wread &copy; 2019 知識共享 — 保留所有權利</div>
         <div v-else-if="selected === 'Simplified'">Wread &copy; 2019 知识共享 — 保留所有权利</div>
+      </div>
+      </div>
+      <div id="credit">
+        Designed and Made by <a href="https://www.chingchang.dev" target="_blank" rel="noopener noreferrer">Ching Chang</a>
       </div>
     </footer>
   </div>
@@ -237,7 +242,8 @@ export default {
     $route(to, from) {
       if (to.name === "Home" ||
       to.name === "Store" && from.name !== "Home" ||
-      to.name === "Info" && from.name === "About") {
+      to.name === "Info" && from.name !== "Home" && from.name !== "Store" ||
+      to.name === "About" && from.name === "Contact") {
         this.flipLeft();
       } else {
         this.flipRight();
@@ -313,10 +319,12 @@ export default {
         case "Home": this.$router.push({ name: 'Store' }); break;
         case "Store": this.$router.push({ name: 'Info' }); break;
         case "Info": this.$router.push({ name: 'About' }); break;
+        case "About": this.$router.push({ name: 'Contact' }); break;
       }
     },
     previousPage() {
       switch (this.$route.name) {
+        case "Contact": this.$router.push({ name: 'About' }); break;
         case "About": this.$router.push({ name: 'Info' }); break;
         case "Info": this.$router.push({ name: 'Store' }); break;
         case "Store": this.$router.push({ name: 'Home' }); break;
@@ -666,55 +674,62 @@ a {
 }
 
 footer {
-  display: flex;
   padding: 20px 60px;
   background-color: #444444;
   transition-duration: 1s;
-  .column {
+  .links {
     display: flex;
-    flex-grow: 1;
-    align-items: center;
-    flex-direction: column;
-    margin: 0px 5vw;
-    width: calc(40px + 10vw);
-    color: white;
-    opacity: 0.5;
-    transition: 0.3s;
-    &:hover {
-      opacity: 1;
-    }
-    &#copyright {
-      text-align: center;
-      font-size: 13px;
-      cursor: default;
-      div {
-        width: 70%;
-      }
-      img {
-        width: calc(50% + 50px);
-        padding-bottom: 10px;
-      }
-    }
-    .title {
-      text-align: center;
-      font-weight: 700;
-      font-size: calc(18px + 1vw);
-      margin-bottom: 13px;
-      letter-spacing: 5px;
-      cursor: default;
-    }
-    a {
-      text-align: center;
+    .column {
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+      flex-direction: column;
+      margin: 0px 5vw;
+      width: calc(40px + 10vw);
       color: white;
-      font-size: calc(16px + 0.2vw);
-      padding-bottom: 4px;
+      opacity: 0.5;
+      transition: 0.3s;
       &:hover {
-        color: $primary-colour;
+        opacity: 1;
       }
+      &#copyright {
+        text-align: center;
+        font-size: 13px;
+        cursor: default;
+        div {
+          width: 70%;
+        }
+        img {
+          width: calc(50% + 50px);
+          padding-bottom: 10px;
+        }
+      }
+      .title {
+        text-align: center;
+        font-weight: 700;
+        font-size: calc(18px + 1vw);
+        margin-bottom: 13px;
+        letter-spacing: 5px;
+        cursor: default;
+      }
+      a {
+        text-align: center;
+        color: white;
+        font-size: calc(16px + 0.2vw);
+        padding-bottom: 4px;
+        &:hover {
+          color: $primary-colour;
+        }
+      }
+    }
+    img {
+      width: 30px;
     }
   }
-  img {
-    width: 30px;
+  #credit {
+    cursor: default;
+    text-align: center;
+    font-size: 20px;
   }
 }
 
