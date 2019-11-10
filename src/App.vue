@@ -62,10 +62,10 @@
         <router-link v-else-if="selected === 'French'" :to="{ name: 'About' }">Nos Valeurs</router-link>
         <router-link v-else-if="selected === 'Traditional'" :to="{ name: 'About' }">關於我們</router-link>
         <router-link v-else-if="selected === 'Simplified'" :to="{ name: 'About' }">关于我们</router-link>
-        <a v-if="selected === 'English'" href="mailto:chingtheprogrammer@gmail.com">Contact Us</a>
-        <a v-else-if="selected === 'French'" href="mailto:chingtheprogrammer@gmail.com">Contactez</a>
-        <a v-else-if="selected === 'Traditional'" href="mailto:chingtheprogrammer@gmail.com">聯絡我們</a>
-        <a v-else-if="selected === 'Simplified'" href="mailto:chingtheprogrammer@gmail.com">联络我们</a>
+        <a v-if="selected === 'English'" href="mailto:chingtheprogrammer@gmail.com" target="_blank">Contact Us</a>
+        <a v-else-if="selected === 'French'" href="mailto:chingtheprogrammer@gmail.com" target="_blank">Contactez</a>
+        <a v-else-if="selected === 'Traditional'" href="mailto:chingtheprogrammer@gmail.com" target="_blank">聯絡我們</a>
+        <a v-else-if="selected === 'Simplified'" href="mailto:chingtheprogrammer@gmail.com" target="_blank">联络我们</a>
       </div>
 
       <div id="book-glider-wrap">
@@ -199,7 +199,7 @@
         <div v-else-if="selected === 'French'" class="title">Liens Sociaux</div>
         <div v-else-if="selected === 'Traditional'" class="title">社群連結</div>
         <div v-else-if="selected === 'Simplified'" class="title">社群连结</div>
-        <a href="mailto:chingtheprogrammer@gmail.com">Email</a>
+        <a href="mailto:chingtheprogrammer@gmail.com" target="_blank">Email</a>
         <a href="https://www.facebook.com/wreadjacompany/?__tn__=%2Cd%2CP-R&eid=ARBPFmfiS-1T2RSFIYa8v0IRt6eObnBxy4UFHb_DtorebZyurXGpYQJ3r9FsH_r1Vpb1JlYhUBxXL1lG" target="_blank">Facebook</a>
         <a href="https://www.instagram.com/wread_ja/" target="_blank">Instagram</a>
       </div>
