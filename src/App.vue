@@ -208,10 +208,10 @@
         <div>
           <router-link :to="{ name: 'Home' }"><img src="@/assets/icons/logo.svg" /></router-link>
         </div>
-        <div v-if="selected === 'English'">Wread &copy; 2019 Creative Commons — All Rights Reserved</div>
-        <div v-else-if="selected === 'French'">Wread &copy; 2019 Creative Commons — Tous Droits Réservés</div>
-        <div v-else-if="selected === 'Traditional'">Wread &copy; 2019 知識共享 — 保留所有權利</div>
-        <div v-else-if="selected === 'Simplified'">Wread &copy; 2019 知识共享 — 保留所有权利</div>
+        <div v-if="selected === 'English'">Wread &copy; 2019 All Rights Reserved</div>
+        <div v-else-if="selected === 'French'">Wread &copy; 2019 Tous Droits Réservés</div>
+        <div v-else-if="selected === 'Traditional'">Wread &copy; 2019 保留所有權利</div>
+        <div v-else-if="selected === 'Simplified'">Wread &copy; 2019 保留所有权利</div>
       </div>
       </div>
       <div id="credit">
