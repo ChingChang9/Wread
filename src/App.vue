@@ -730,6 +730,17 @@ footer {
     cursor: default;
     text-align: center;
     font-size: 20px;
+    color: white;
+    opacity: 0.5;
+    a {
+      color: white;
+      &:hover {
+        color: $primary-colour;
+      }
+    }
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 
@@ -867,19 +878,21 @@ footer {
 }
 @media (max-width: 815px) {
   footer {
-    align-items: center;
-    flex-direction: column;
-    #copyright {
-      width: 50vw;
-      img {
-        width: calc(30% + 50px);
+    .links {
+      align-items: center;
+      flex-direction: column;
+      #copyright {
+        width: 50vw;
+        img {
+          width: calc(30% + 50px);
+        }
       }
-    }
-    .column {
-      margin-bottom: 20px;
-      width: 50vw;
-      .title {
-        margin-bottom: 0px;
+      .column {
+        margin-bottom: 20px;
+        width: 50vw;
+        .title {
+          margin-bottom: 0px;
+        }
       }
     }
   }
