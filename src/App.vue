@@ -184,7 +184,7 @@
     </div>
 
     <footer :class="{ blur: showGoal }">
-      <div class="links">
+      <div id="columns">
         <div class="column">
           <div v-if="selected === 'English'" class="title">Sponsors</div>
           <div v-else-if="selected === 'French'" class="title">Sponsors</div>
@@ -676,15 +676,14 @@ a {
 footer {
   padding: 20px 60px;
   background-color: #444444;
-  transition-duration: 1s;
-  .links {
+  #columns {
     display: flex;
     .column {
       display: flex;
       flex-grow: 1;
       align-items: center;
       flex-direction: column;
-      margin: 0px 5vw;
+      margin: 0 5vw;
       width: calc(40px + 10vw);
       color: white;
       opacity: 0.5;
