@@ -97,8 +97,8 @@ export default {
       switch(this.selected) {
         case "English": alert("We are out of stock. Sorry for the inconvenience."); break;
         case "French": alert("Nous sommes en rupture de stock. Désolé pour le dérangement."); break;
-        case "Traditional": alert("我們沒貨了。抱歉給你帶來不便。"); break;
-        case "Simplified": alert("我们没货了。抱歉给你带来不便。"); break;
+        case "Traditional": alert("我們沒貨了。抱歉給您帶來不便。"); break;
+        case "Simplified": alert("我们没货了。抱歉给您带来不便。"); break;
       }
     }
   }
